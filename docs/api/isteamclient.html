@@ -1,0 +1,1204 @@
+<h1>ISteamClient Interface</h1>
+Interface to create a new steam instance or to connect to an existing steam instance, whether it's
+in a different process or is local.<br />
+<br />
+In most scenarios this is all handled automatically via
+<a href="/doc/api/steam_api#SteamAPI_Init">SteamAPI_Init</a>.<br />
+You'll only ever need to use these APIs if you have a more complex versioning scheme, or if you want
+to implement a multiplexed gameserver where a single process is handling multiple games at once with
+independent gameserver Steam IDs.
+<h2 class="bb_section"><a name="functions"></a>Member Functions</h2>
+Member functions for <code class="bb_code bb_code_inline nohighlight">ISteamClient</code> are called
+through the global accessor function
+<code class="bb_code bb_code_inline nohighlight">SteamClient()</code>.
+<h2 class="bb_subsection"><a name="BReleaseSteamPipe"></a>BReleaseSteamPipe</h2>
+<div class="bb_code cpp">bool BReleaseSteamPipe( HSteamPipe hSteamPipe );</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to release.</td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Releases a previously created communications pipe.<br />
+<br />
+NOT THREADSAFE - Ensure that no other threads are accessing Steamworks API when calling!<br />
+<br />
+<strong>Returns:</strong> bool<br />
+<strong>true</strong> if the pipe was valid and released successfully; otherwise,
+<strong>false</strong>.
+<h2 class="bb_subsection"><a name="BShutdownIfAllPipesClosed"></a>BShutdownIfAllPipesClosed</h2>
+<div class="bb_code cpp">bool BShutdownIfAllPipesClosed();</div>
+Triggers global shutdown for the DLL if all pipes are closed.<br />
+<br />
+<strong>Returns:</strong> bool
+<h2 class="bb_subsection"><a name="ConnectToGlobalUser"></a>ConnectToGlobalUser</h2>
+<div class="bb_code cpp">HSteamUser ConnectToGlobalUser( HSteamPipe hSteamPipe );</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The connection pipe to connect with.</td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Connects to an existing global user, failing if none exists.<br />
+<br />
+Used by the game to coordinate with the SteamUI.<br />
+<br />
+NOT THREADSAFE - Ensure that no other threads are accessing Steamworks API when calling!<br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a><br />
+The HSteamUser handle of the global user. Returns 0 upon failure if the pipe is invalid or there is
+no global user.
+<h2 class="bb_subsection"><a name="CreateLocalUser"></a>CreateLocalUser</h2>
+<div class="bb_code cpp">
+    HSteamUser CreateLocalUser( HSteamPipe *phSteamPipe, EAccountType eAccountType );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>phSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a> *</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><strong>eAccountType</strong></td>
+            <td><a href="/doc/api/steam_api#EAccountType">EAccountType</a></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Create a Steam user that won't be shared with anyone else. Only used by game servers.<br />
+<br />
+NOT THREADSAFE - Ensure that no other threads are accessing Steamworks API when calling!<br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a><br />
+A new handle to a SteamUser.
+<h2 class="bb_subsection"><a name="CreateSteamPipe"></a>CreateSteamPipe</h2>
+<div class="bb_code cpp">HSteamPipe CreateSteamPipe();</div>
+Creates a communication pipe to the Steam client.<br />
+NOT THREADSAFE - ensure that no other threads are accessing Steamworks API when calling<br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a>
+<h2 class="bb_subsection"><a name="GetIPCCallCount"></a>GetIPCCallCount</h2>
+<div class="bb_code cpp">uint32 GetIPCCallCount();</div>
+Returns the number of IPC (Inter-Process Communication) calls made since the last time this function
+was called.<br />
+<br />
+Used for perf debugging so you can understand how many IPC calls your game makes per frame. Each IPC
+call is at minimum a thread context switch if not a process switch so you want to be diligent and
+possibly rate control how often you do them.<br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/steam_api#uint32">uint32</a>
+<h2 class="bb_subsection"><a name="GetISteamApps"></a>GetISteamApps</h2>
+<div class="bb_code cpp">
+    ISteamApps * GetISteamApps( HSteamUser hSteamUser, HSteamPipe hSteamPipe, const char *pchVersion
+    );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamApps">ISteamApps</a> interface associated with the specified
+user handle.<br />
+<br />
+A constant containing the current version of the interface is: "STEAMAPPS_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor: <code class="bb_code bb_code_inline cpp">SteamApps()</code><br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamApps">ISteamApps</a> *<br />
+A pointer to the implementation of SteamApps associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamController"></a>GetISteamController</h2>
+<div class="bb_code cpp">
+    ISteamController * GetISteamController( HSteamUser hSteamUser, HSteamPipe hSteamPipe, const char
+    *pchVersion );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamController">ISteamController</a> interface associated with the
+specified user handle.<br />
+<br />
+A constant containing the current version of the interface is:
+"STEAMCONTROLLER_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor: <code class="bb_code bb_code_inline cpp">SteamController()</code><br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamController">ISteamController</a> *<br />
+A pointer to the implementation of SteamController associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamFriends"></a>GetISteamFriends</h2>
+<div class="bb_code cpp">
+    ISteamFriends * GetISteamFriends( HSteamUser hSteamUser, HSteamPipe hSteamPipe, const char
+    *pchVersion );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamFriends">ISteamFriends</a> interface associated with the
+specified user handle.<br />
+<br />
+A constant containing the current version of the interface is: "STEAMFRIENDS_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor: <code class="bb_code bb_code_inline cpp">SteamFriends()</code><br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamFriends">ISteamFriends</a> *<br />
+A pointer to the implementation of SteamFriends associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamGameServer"></a>GetISteamGameServer</h2>
+<div class="bb_code cpp">
+    ISteamGameServer * GetISteamGameServer( HSteamUser hSteamUser, HSteamPipe hSteamPipe, const char
+    *pchVersion );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamGameServer">ISteamGameServer</a> interface associated with the
+specified user handle.<br />
+<br />
+A constant containing the current version of the interface is:
+"STEAMGAMESERVER_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor: <code class="bb_code bb_code_inline cpp">SteamGameServer()</code><br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamGameServer">ISteamGameServer</a> *<br />
+A pointer to the implementation of SteamGameServer associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamGameServerStats"></a>GetISteamGameServerStats</h2>
+<div class="bb_code cpp">
+    ISteamGameServerStats * GetISteamGameServerStats( HSteamUser hSteamUser, HSteamPipe hSteamPipe,
+    const char *pchVersion );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamGameServerStats">ISteamGameServerStats</a> interface
+associated with the specified user handle.<br />
+<br />
+A constant containing the current version of the interface is:
+"STEAMGAMESERVERSTATS_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor: <code class="bb_code bb_code_inline cpp">SteamGameServerStats()</code
+><br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamGameServerStats">ISteamGameServerStats</a> *<br />
+A pointer to the implementation of SteamGameServerStats associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamGenericInterface"></a>GetISteamGenericInterface</h2>
+<div class="bb_code cpp">
+    void * GetISteamGenericInterface( HSteamUser hSteamUser, HSteamPipe hSteamPipe, const char
+    *pchVersion );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves a generic interface associated with a user handle.<br />
+<br />
+You should never need to use this under normal conditions.<br />
+<br />
+<strong>Returns:</strong> void *<br />
+A pointer to an implementation of an interface associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamHTMLSurface"></a>GetISteamHTMLSurface</h2>
+<div class="bb_code cpp">
+    ISteamHTMLSurface * GetISteamHTMLSurface( HSteamUser hSteamUser, HSteamPipe hSteamPipe, const
+    char *pchVersion );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamHTMLSurface">ISteamHTMLSurface</a> interface associated with
+the specified user handle.<br />
+<br />
+A constant containing the current version of the interface is:
+"STEAMHTMLSURFACE_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor: <code class="bb_code bb_code_inline cpp">SteamHTMLSurface()</code
+><br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamHTMLSurface">ISteamHTMLSurface</a> *<br />
+A pointer to the implementation of SteamHTMLSurface associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamHTTP"></a>GetISteamHTTP</h2>
+<div class="bb_code cpp">
+    ISteamHTTP * GetISteamHTTP( HSteamUser hSteamUser, HSteamPipe hSteamPipe, const char *pchVersion
+    );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamHTTP">ISteamHTTP</a> interface associated with the specified
+user handle.<br />
+<br />
+A constant containing the current version of the interface is: "STEAMHTTP_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor: <code class="bb_code bb_code_inline cpp">SteamHTTP()</code><br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamHTTP">ISteamHTTP</a> *<br />
+A pointer to the implementation of SteamHTTP associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamInventory"></a>GetISteamInventory</h2>
+<div class="bb_code cpp">
+    ISteamInventory * GetISteamInventory( HSteamUser hSteamUser, HSteamPipe hSteamPipe, const char
+    *pchVersion );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamInventory">ISteamInventory</a> interface associated with the
+specified user handle.<br />
+<br />
+A constant containing the current version of the interface is: "STEAMINVENTORY_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor: <code class="bb_code bb_code_inline cpp">SteamInventory()</code><br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamInventory">ISteamInventory</a> *<br />
+A pointer to the implementation of SteamInventory associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamMatchmaking"></a>GetISteamMatchmaking</h2>
+<div class="bb_code cpp">
+    ISteamMatchmaking * GetISteamMatchmaking( HSteamUser hSteamUser, HSteamPipe hSteamPipe, const
+    char *pchVersion );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamMatchmaking">ISteamMatchmaking</a> interface associated with
+the specified user handle.<br />
+<br />
+A constant containing the current version of the interface is:
+"STEAMMATCHMAKING_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor: <code class="bb_code bb_code_inline cpp">SteamMatchmaking()</code
+><br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamMatchmaking">ISteamMatchmaking</a> *<br />
+A pointer to the implementation of SteamMatchmaking associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamMatchmakingServers"></a>GetISteamMatchmakingServers</h2>
+<div class="bb_code cpp">
+    ISteamMatchmakingServers * GetISteamMatchmakingServers( HSteamUser hSteamUser, HSteamPipe
+    hSteamPipe, const char *pchVersion );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamMatchmakingServers">ISteamMatchmakingServers</a> interface
+associated with the specified user handle.<br />
+<br />
+A constant containing the current version of the interface is:
+"STEAMMATCHMAKINGSERVERS_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor:
+<code class="bb_code bb_code_inline cpp">SteamMatchmakingServers()</code><br />
+<br />
+<strong>Returns:</strong>
+<a href="/doc/api/ISteamMatchmakingServers">ISteamMatchmakingServers</a> *<br />
+A pointer to the implementation of SteamMatchmakingServers associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamMusic"></a>GetISteamMusic</h2>
+<div class="bb_code cpp">
+    ISteamMusic * GetISteamMusic( HSteamUser hSteamUser, HSteamPipe hSteamPipe, const char
+    *pchVersion );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamMusic">ISteamMusic</a> interface associated with the specified
+user handle.<br />
+<br />
+A constant containing the current version of the interface is: "STEAMMUSIC_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor: <code class="bb_code bb_code_inline cpp">SteamMusic()</code><br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamMusic">ISteamMusic</a> *<br />
+A pointer to the implementation of SteamMusic associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamMusicRemote"></a>GetISteamMusicRemote</h2>
+<div class="bb_code cpp">
+    ISteamMusicRemote * GetISteamMusicRemote( HSteamUser hSteamUser, HSteamPipe hSteamPipe, const
+    char *pchVersion );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamMusicRemote">ISteamMusicRemote</a> interface associated with
+the specified user handle.<br />
+<br />
+A constant containing the current version of the interface is:
+"STEAMMUSICREMOTE_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor: <code class="bb_code bb_code_inline cpp">SteamMusicRemote()</code
+><br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamMusicRemote">ISteamMusicRemote</a> *<br />
+A pointer to the implementation of SteamMusicRemote associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamNetworking"></a>GetISteamNetworking</h2>
+<div class="bb_code cpp">
+    ISteamNetworking * GetISteamNetworking( HSteamUser hSteamUser, HSteamPipe hSteamPipe, const char
+    *pchVersion );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamNetworking">ISteamNetworking</a> interface associated with the
+specified user handle.<br />
+<br />
+A constant containing the current version of the interface is:
+"STEAMNETWORKING_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor: <code class="bb_code bb_code_inline cpp">SteamNetworking()</code><br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamNetworking">ISteamNetworking</a> *<br />
+A pointer to the implementation of SteamNetworking associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamRemoteStorage"></a>GetISteamRemoteStorage</h2>
+<div class="bb_code cpp">
+    ISteamRemoteStorage * GetISteamRemoteStorage( HSteamUser hSteamUser, HSteamPipe hSteamPipe,
+    const char *pchVersion );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamRemoteStorage">ISteamRemoteStorage</a> interface associated
+with the specified user handle.<br />
+<br />
+A constant containing the current version of the interface is:
+"STEAMREMOTESTORAGE_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor: <code class="bb_code bb_code_inline cpp">SteamRemoteStorage()</code
+><br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamRemoteStorage">ISteamRemoteStorage</a> *<br />
+A pointer to the implementation of SteamRemoteStorage associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamScreenshots"></a>GetISteamScreenshots</h2>
+<div class="bb_code cpp">
+    ISteamScreenshots * GetISteamScreenshots( HSteamUser hSteamUser, HSteamPipe hSteamPipe, const
+    char *pchVersion );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamScreenshots">ISteamScreenshots</a> interface associated with
+the specified user handle.<br />
+<br />
+A constant containing the current version of the interface is:
+"STEAMSCREENSHOTS_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor: <code class="bb_code bb_code_inline cpp">SteamScreenshots()</code
+><br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamScreenshots">ISteamScreenshots</a> *<br />
+A pointer to the implementation of SteamScreenshots associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamUGC"></a>GetISteamUGC</h2>
+<div class="bb_code cpp">
+    ISteamUGC * GetISteamUGC( HSteamUser hSteamUser, HSteamPipe hSteamPipe, const char *pchVersion
+    );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamUGC">ISteamUGC</a> interface associated with the specified
+user handle.<br />
+<br />
+A constant containing the current version of the interface is: "STEAMUGC_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor: <code class="bb_code bb_code_inline cpp">SteamUGC()</code><br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamUGC">ISteamUGC</a> *<br />
+A pointer to the implementation of SteamUGC associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamUnifiedMessages"></a>GetISteamUnifiedMessages</h2>
+<div class="bb_code cpp">
+    ISteamUnifiedMessages * GetISteamUnifiedMessages( HSteamUser hSteamUser, HSteamPipe hSteamPipe,
+    const char *pchVersion );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamUnifiedMessages">ISteamUnifiedMessages</a> interface
+associated with the specified user handle.<br />
+<br />
+A constant containing the current version of the interface is:
+"STEAMUNIFIEDMESSAGES_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor: <code class="bb_code bb_code_inline cpp">SteamUnifiedMessages()</code
+><br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamUnifiedMessages">ISteamUnifiedMessages</a> *<br />
+A pointer to the implementation of SteamUnifiedMessages associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamUser"></a>GetISteamUser</h2>
+<div class="bb_code cpp">
+    ISteamUser * GetISteamUser( HSteamUser hSteamUser, HSteamPipe hSteamPipe, const char *pchVersion
+    );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamUser">ISteamUser</a> interface associated with the specified
+user handle.<br />
+<br />
+A constant containing the current version of the interface is: "STEAMUSER_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor: <code class="bb_code bb_code_inline cpp">SteamUser()</code><br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamUser">ISteamUser</a> *<br />
+A pointer to the implementation of SteamUser associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamUserStats"></a>GetISteamUserStats</h2>
+<div class="bb_code cpp">
+    ISteamUserStats * GetISteamUserStats( HSteamUser hSteamUser, HSteamPipe hSteamPipe, const char
+    *pchVersion );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamUserStats">ISteamUserStats</a> interface associated with the
+specified user handle.<br />
+<br />
+A constant containing the current version of the interface is: "STEAMUSERSTATS_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor: <code class="bb_code bb_code_inline cpp">SteamUserStats()</code><br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamUserStats">ISteamUserStats</a> *<br />
+A pointer to the implementation of SteamUserStats associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamUtils"></a>GetISteamUtils</h2>
+<div class="bb_code cpp">
+    ISteamUtils * GetISteamUtils( HSteamPipe hSteamPipe, const char *pchVersion );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamUtils">ISteamUtils</a> interface associated with the specified
+user handle.<br />
+<br />
+A constant containing the current version of the interface is: "STEAMUTILS_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor: <code class="bb_code bb_code_inline cpp">SteamUtils()</code><br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamUtils">ISteamUtils</a> *<br />
+A pointer to the implementation of SteamUtils associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="GetISteamVideo"></a>GetISteamVideo</h2>
+<div class="bb_code cpp">
+    ISteamVideo * GetISteamVideo( HSteamUser hSteamUser, HSteamPipe hSteamPipe, const char
+    *pchVersion );
+</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user handle to get the interface from.</td>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The pipe to access the interface over.</td>
+        </tr>
+        <tr>
+            <td><strong>pchVersion</strong></td>
+            <td>const char *</td>
+            <td>
+                The version string that identifies the version of the interface that you receive.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Retrieves the <a href="/doc/api/ISteamVideo">ISteamVideo</a> interface associated with the specified
+user handle.<br />
+<br />
+A constant containing the current version of the interface is: "STEAMVIDEO_INTERFACE_VERSION"<br />
+<br />
+You should never need to use this under normal conditions, it's usually functionally equivalent to
+calling the global accessor: <code class="bb_code bb_code_inline cpp">SteamVideo()</code><br />
+<br />
+<strong>Returns:</strong> <a href="/doc/api/ISteamVideo">ISteamVideo</a> *<br />
+A pointer to the implementation of SteamVideo associated with the given HSteamUser.<br />
+<br />
+Returns NULL if any of the arguments are not valid.
+<h2 class="bb_subsection"><a name="ReleaseUser"></a>ReleaseUser</h2>
+<div class="bb_code cpp">void ReleaseUser( HSteamPipe hSteamPipe, HSteamUser hUser );</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>hSteamPipe</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamPipe">HSteamPipe</a></td>
+            <td>The connection pipe to remove the user over.</td>
+        </tr>
+        <tr>
+            <td><strong>hUser</strong></td>
+            <td><a href="/doc/api/ISteamClient#HSteamUser">HSteamUser</a></td>
+            <td>The user to remove.</td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Removes an allocated user.<br />
+<br />
+NOT THREADSAFE - Ensure that no other threads are accessing Steamworks API when calling!
+<h2 class="bb_subsection"><a name="SetLocalIPBinding"></a>SetLocalIPBinding</h2>
+<div class="bb_code cpp">void SetLocalIPBinding( uint32 unIP, uint16 usPort );</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>unIP</strong></td>
+            <td><a href="/doc/api/steam_api#uint32">uint32</a></td>
+            <td>The local IP to bind to.</td>
+        </tr>
+        <tr>
+            <td><strong>usPort</strong></td>
+            <td><a href="/doc/api/steam_api#uint16">uint16</a></td>
+            <td>The port to bind to.</td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Set the local IP and Port to bind to.<br />
+<br />
+This must be set before calling
+<a href="/doc/api/ISteamClient#CreateLocalUser">ISteamClient::CreateLocalUser</a>!
+<h2 class="bb_subsection"><a name="SetWarningMessageHook"></a>SetWarningMessageHook</h2>
+<div class="bb_code cpp">void SetWarningMessageHook( SteamAPIWarningMessageHook_t pFunction );</div>
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>pFunction</strong></td>
+            <td>SteamAPIWarningMessageHook_t</td>
+            <td>Function pointer to the callback function.</td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Sets a warning message hook to receive SteamAPI warnings and info messages in a callback
+function.<br />
+<br />
+The function prototype must match the definition in SteamAPIWarningMessageHook_t. This includes the
+extern "C" linkage and __cdecl calling convention.<br />
+<br />
+'int nSeverity' is the severity; 0 for msg, 1 for warning. If you are running in through a debugger
+only warnings will be sent. If you add -debug_steamapi to the command-line then informational
+messages will also be sent.<br />
+'const char * pchDebugText' is the text of the message.<br />
+Callbacks will occur directly after the API function is called that generated the warning or
+message<br />
+<br />
+Passing NULL will unhook.<br />
+<br />
+<strong>Example:</strong><br />
+<div class="bb_code cpp">
+    extern "C" void __cdecl SteamAPIDebugTextHook( int nSeverity, const char *pchDebugText ) {
+    ::OutputDebugString( pchDebugText ); if ( nSeverity &gt;= 1 ) { // place to set a breakpoint for
+    catching API errors int x = 3; x = x; } } void EnableWarningMessageHook() {
+    SteamUtils()-&gt;SetWarningMessageHook( &amp;SteamAPIDebugTextHook ); }
+</div>
+<h2 class="bb_section"><a name="typedefs"></a>Typedefs</h2>
+These are typedefs which are defined for use with ISteamClient.<br />
+<br />
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Base type</th>
+            <th>Description</th>
+        </tr>
+        <tr id="HSteamPipe">
+            <td><strong>HSteamPipe</strong></td>
+            <td><a href="/doc/api/steam_api#int32">int32</a></td>
+            <td>Handle to a communication pipe to the Steam client.</td>
+        </tr>
+        <tr id="HSteamUser">
+            <td><strong>HSteamUser</strong></td>
+            <td><a href="/doc/api/steam_api#int32">int32</a></td>
+            <td>Handle to single instance of a steam user.</td>
+        </tr>
+    </tbody>
+</table>

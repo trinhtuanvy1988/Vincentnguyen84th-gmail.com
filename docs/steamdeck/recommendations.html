@@ -1,0 +1,106 @@
+<h1>Getting your game ready for Steam Deck</h1>
+While at its core, the Steam Deck is a PC, it comes in a new form factor, and with an additional set
+of customer hopes and expectations. In addition to the criteria used for
+<a href="/doc/steamdeck/compat" target="_blank" rel="noreferrer"
+    >Steam Deck compatibility review process</a
+>, we have some additional recommendations, presented here.<br />
+<br />
+None of the recommendations on this page will affect the compatibility badge of your game. All
+recommendations here are targeted at meeting customer expectations around input and display,
+improving performance and battery life, and taking full advantage of the new opportunities provided
+by the Deck.<br />
+<br />
+While the recommendations here are disproportionately valuable to Deck customers, they are also all
+valuable for PC gamers in general, many of whom only play with controllers, only play in their
+living room, etc.
+<div class="bb_callout">
+    <div>
+        <strong>Steamworks SDK</strong>: Many of the APIs recommended on this page were added in
+        version 1.52 of the Steamworks SDK, released September 14, 2021.
+    </div>
+</div>
+<h2 class="bb_subsection"><a name="1"></a>Input</h2>
+<ul>
+    <li>
+        <strong>Default Controller Configuration</strong>: We strongly recommend (and require for
+        <a href="/doc/steamdeck/compat" target="_blank" rel="noreferrer">Verified on Deck badging</a
+        >) that the default controller configuration for your game enables access to all in-game
+        functionality. If your game doesn't natively support controllers, we recommend creating a
+        controller configuration to map to the appropriate mouse and keyboard inputs. Better yet,
+        implementing gamepad or native Steam Input support may open your game to a whole new set of
+        customers.<br />
+    </li>
+    <li>
+        <strong>Text Input</strong>: We strongly recommend (and require for
+        <a href="/doc/steamdeck/compat" target="_blank" rel="noreferrer">Verified on Deck badging</a
+        >) that games automatically display an on-screen keyboard when requiring the user to input
+        text. We recommend using one of the two Steamworks SDK on-screen keyboard APIs, depending on
+        your use case:
+        <a href="/doc/api/ISteamUtils#ShowFloatingGamepadTextInput" target="_blank" rel="noreferrer"
+            >ShowFloatingGamepadTextInput</a
+        >
+        (sends direct key inputs) and
+        <a href="/doc/api/ISteamUtils#ShowGamepadTextInput" target="_blank" rel="noreferrer"
+            >ShowGamepadTextInput</a
+        >
+        (callback-based).<br />
+    </li>
+    <li>
+        <strong>Gyro/Trackpad Friendliness</strong>: We recommend that games with support for both
+        mouse-style (1:1 movement) and joystick-style camera movement cleanly support both at the
+        same time. We recommend allowing mouse events to affect the camera as they normally would
+        without perturbing simultaneous controller functionality, and only switching to
+        mouse/keyboard mode if a mouse click event is received. Common problems include joystick
+        input getting locked out when mouse camera is used and vice versa, controller buttons not
+        working when mouse camera is being used, on-screen button prompts changing between
+        controller and keyboard/mouse icons, all of which make it more difficult for customers to
+        play with their preferred control scheme. (Note: this functionality is automatic when using
+        the <a href="/doc/api/isteaminput" target="_blank" rel="noreferrer">Steam Input API</a>.)
+    </li>
+</ul>
+<h2 class="bb_subsection"><a name="2"></a>Graphics</h2>
+<ul>
+    <li>
+        <strong>Vulkan API</strong>: We recommend targeting Vulkan as your primary graphics API for
+        best performance and battery life. If you use an engine like Unity or Unreal, enabling
+        Vulkan in your build for all users will result in the highest performance/longevity. (Note:
+        Proton includes a DirectX-to-Vulkan translation layer. If your game or engine has
+        high-quality DirectX support but no Vulkan support, it's likely that this automated
+        translation layer will exceed the performance of doing a custom Vulkan implementation.)<br />
+    </li>
+    <li>
+        <strong>Video/Audio Codecs</strong>: We recommend using standalone codecs (eg., VP9 or AV1)
+        rather than codecs that are tied to a specific vendor (eg., WMF).
+    </li>
+</ul>
+<h2 class="bb_subsection"><a name="3"></a>Game Features</h2>
+<ul>
+    <li>
+        <strong>Clouded Saves</strong>: For games that allow saving, we recommend enabling automatic
+        clouding of saved games: users should be able to save their game on a Deck and resume on a
+        different PC, and vice versa, without manually transferring files. This means that games
+        should provide a form of cloud save via either Steam Cloud or an automatic third-party
+        service such as a game- or publisher-specific account with server-side save files. We highly
+        recommend using
+        <a href="/doc/features/cloud" target="_blank" rel="noreferrer">Steam Cloud</a> for automatic
+        transfers. We recommend against syncing game configuration settings, ie., display
+        resolution, between different devices.<br />
+    </li>
+    <li>
+        <strong>Offline Mode</strong>: We strongly recommend all singleplayer content is accessible
+        without an Internet connection. You can test your game without any online connectivity,
+        including the first run on a new Steam account. This feature is especially valuable for Deck
+        customers, who may have more sporadic network access than a standard gaming PC.<br />
+    </li>
+    <li>
+        <strong>Launchers</strong>: We recommend putting all required functionality into your game
+        client rather than requiring users to navigate a launcher before running your game.
+        Launchers often rely on platform-specific frameworks (ie., .NET, WPF, etc.) that can turn
+        into difficult experiences for customers on a small screen using a controller for
+        navigation. When native UI launchers are required, you can use the
+        <a href="/doc/api/ISteamUtils#SetGameLauncherMode" target="_blank" rel="noreferrer"
+            >SetGameLauncherMode</a
+        >
+        API to automatically translate controller input to keyboard/mouse events to assist the user.
+    </li>
+</ul>

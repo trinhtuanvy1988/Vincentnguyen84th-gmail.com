@@ -1,0 +1,219 @@
+<h1>Transferring Applications</h1>
+If you need to transfer a game or other application to another Steamworks partner account, it can be
+done entirely through a set of tools built into the Steamworks website. These tools manages the
+approval process and keeps a history of transfers.<br />
+<br />
+Transfers may be useful in cases such as when a game changes ownership, or if an individual forms a
+corporation and needs to move the game to be distributed under the new corporation.
+<h2 class="bb_section"><a name="1"></a>Necessary permissions and configuration</h2>
+To complete a transfer of a game with Steamworks, there are some requirements:<br />
+<br />
+<strong>The Steam User that initiates the transfer:</strong><br />
+<ul>
+    <li>
+        must have Actual Authority permission within Steamworks for the Steamworks partner account
+        that has current distribution rights for the game.<br />
+    </li>
+    <li>needs to know the e-mail address of the recipient of the transfer.</li>
+</ul>
+<br />
+<strong>The Steam User that receives the transfer :</strong><br />
+<ul>
+    <li>
+        must be attached to a complete, verified, and fully onboard Steamworks partner account and
+        have Actual Authority permission within that Steamworks account. <br />
+        (Note: If you already have a partner account, but need to make changes to who is listed as
+        Actual Authority, please use our
+        <a
+            href="https://help.steampowered.com/en/wizard/HelpWithPublishing?issueid=918"
+            target="_blank"
+            rel="noreferrer"
+            >Actual Authority request tool</a
+        >.)<br />
+    </li>
+    <li>
+        if the recipient does not have a fully onboard partner account, one can sign up through
+        <a href="/steamdirect" target="_blank" rel="noreferrer">Steam Direct</a> and pay the Steam
+        Direct fee.
+    </li>
+</ul>
+<h2 class="bb_section"><a name="2"></a>Starting a transfer</h2>
+To start a transfer, please visit
+<a href="/pub/apptransfers/" target="_blank" rel="noreferrer">Transfer Applications</a> tool, which
+can also be found under the "Tools" menu on the Steamworks website. You will need to be the Actual
+Authority of your Steamworks partner account to complete an app transfer.
+<h2 class="bb_section"><a name="3"></a>Steps of the transfer</h2>
+A transfer consists of five steps. The length of the entire process depends on how long it takes the
+recipient and transferer to confirm the transfer. Once both parties have fully approved the app
+transfer, Valve will need to approve the transfer. Valve will do so as quickly as possible, usually
+within 2-7 business days.<br />
+<br />
+<ol>
+    <li>
+        Transferer initiates the transfer. The existing manager of an app will:<br />
+        <ul>
+            <li>enter the e-mail address of the recipient to initiate the transfer .<br /></li>
+            <li>
+                choose an effective date for the transfer, see more about the effective date
+                below.<br />
+            </li>
+            <li>
+                provide a reason for the transfer so Valve can more easily review and approve the
+                transfer.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Recipient approves the transfer. The recipient will:<br />
+        <ul>
+            <li>
+                receive an e-mail notifying of the pending transfer. That e-mail leads to the App
+                Transfer Tool under the "Tools" menu in Steamworks. <br />
+            </li>
+            <li>see any pending transfers initiated by other partners. <br /></li>
+            <li>
+                need to have Actual Authority for the Steamworks partner account to complete an app
+                transfer.
+            </li>
+        </ul>
+    </li>
+    <li>Transferer re-confirms the transfer.<br /></li>
+    <li>
+        Valve will review the transfer. If there are questions about the reason for the transfer, we
+        will email the actual authority users to obtain more information. <br />
+    </li>
+    <li>Transfer complete. Once approved, all management rights transfer to the new partner.</li>
+</ol>
+<h2 class="bb_section"><a name="4"></a>Effective Date</h2>
+The effective date of a transfer is the date that payments will begin to the new partner.<br />
+<br />
+The effective date is not the date that management rights transfer to the new partner. Management
+rights will transfer immediately upon approval by Valve.<br />
+<br />
+The system defaults to an effective date of 7 days from the date the transfer is initiated.
+<h2 class="bb_section"><a name="5"></a>Transfer of Attached Data</h2>
+All data, including sales, wishlists, followers, user reviews, etc. are associated with the game and
+will always be associated with the game. But access to reports of that data by the Transferee can be
+limited to certain time ranges when an app is transferred. Below are some details on how various
+pieces of data are handled.
+<h2 class="bb_subsection">
+    <a name="6"></a>Store page, community hub, user reviews, etc. remain the same
+</h2>
+All public elements of the appID will remain exactly the same after the transfer, and customer
+ownership is not interrupted or changed. Once the transfer completes, the new owner of the appID can
+edit the store page, edit the Publisher field, upload new assets, update the build, change the price
+and so on. But everything will stay the same until the new owner makes changes. No community content
+(user reviews, forums, etc) will be affected by the transfer.
+<h2 class="bb_subsection"><a name="7"></a>Existing bundle management is not transferred</h2>
+If the game is already included in a bundle prior to transfer, management of the bundle does not
+transfer with the game. Please have the transferer remove the game from any existing bundles prior
+to transferring if necessary. An alternate option is to ask the original bundle creator to convert
+the bundle to a collaborative bundle.
+<h2 class="bb_subsection"><a name="8"></a>Wishlist reporting moves with the game</h2>
+All historical wishlist data will transfer with the game, becoming entirely accessible by the
+transferee.
+<h2 class="bb_subsection"><a name="9"></a>Sales reporting is split at the effective date</h2>
+By default, financial information is only visible to partners from time periods that they were paid
+for the game. Therefore, the new owner will see financial information only from the point of
+transfer and not before. Visibility of full sales history can be granted to the recipient by the
+Transferer. To share financial viewing rights, please see
+<a href="/doc/gettingstarted/managing_apps/sharing">Application Management Sharing</a>.
+<h2 class="bb_subsection"><a name="10"></a>UTM reporting is split at the effective date</h2>
+By default, the recipient Steamworks partner will only have access to two weeks of UTM data prior to
+the transfer effective date and forward. The historical UTM data will remain associated with the
+Transferer. If access is needed to this information,
+<a href="/doc/gettingstarted/managing_apps/sharing">management rights can be shared</a> back to the
+Transferer once the app is transferred.
+<h2 class="bb_subsection">
+    <a name="11"></a>Publisher API keys are <strong>not</strong> transferred with the game
+</h2>
+If the application's backend infrastructure makes use of
+<a href="/doc/webapi_overview/auth#publisher-keys">publisher API keys</a> (e.g., for
+<a href="/doc/features/microtransactions">microtransactions</a>,
+<a href="/doc/features/auth">authentication/entitlement checks</a>, etc.) then you will need to
+create new API keys under the Steamworks partner that is receiving the transferred app. To ensure
+uninterrupted functionality during the transfer, we recommend the following process:<br />
+<ol>
+    <li>
+        When the recipient confirms the transfer, they must check the
+        <a href="/doc/gettingstarted/managing_apps/sharing">Share management rights</a> box at the
+        bottom of the page so the apps remain in the sender's existing web API group(s) after the
+        transfer. Granting financial data access is not required.<br />
+    </li>
+    <li>
+        Once the transfer is approved by Valve, the recipient will need to create new API key(s)
+        under their Steamwork's partner account with the affected apps.<br />
+    </li>
+    <li>
+        Update the game's server infrastructure to use the new API key(s) and confirm expected
+        functionality using the new web api key(s).<br />
+    </li>
+    <li>
+        When ready, either partner can
+        <a href="/appsharing/details/" target="_blank" rel="noreferrer"
+            >cancel the application share</a
+        >
+        to remove management and web API access of the transferred apps from the old partner
+        account.
+    </li>
+</ol>
+<h2 class="bb_section"><a name="12"></a>FAQ</h2>
+<h4>Q. Can I set when the new company will start receiving payments?</h4>
+A. Only the initiator can set the effective date which is when payments will begin to the receiving
+party once the transfer request is approved by Valve.<br />
+<br />
+You may wish to choose a particular date to conform to your contract, but we find that for
+accounting purposes, the 1st of the current or following month may be a convenient date for some
+partners.<br />
+<br />
+We do not recommend and may not allow dates far in advance of the current date or dates earlier than
+the 1st of the current month.
+<h4>Q. How long does the app transfer process take?</h4>
+A. Once both parties have fully approved the app transfer, Valve will respond to the request as
+quickly as possible. Usually within 2-7 business days.
+<h4>Q. Can I transfer multiple applications in one request? Can I transfer DLC?</h4>
+A. Yes, you can select multiple applications and DLC to transfer in a single request.
+<h4>
+    Q. Transferee accepted the transfer, but it is still "Awaiting Confirmation From Transferer",
+    what do I do?
+</h4>
+A. The transferer or initiator should have received an email with a link to confirm the transfer. If
+you cannot find it, you can cancel and repeat the process. If that doesn't work please create a
+support ticket.
+<h4>Q. Can I run a discount on a game right away once transfer has been completed?</h4>
+A. Transferred games are subject to the same discount cool-down timing as normal. This cool-down
+does not get reset or shortened by the app transfer process. For more details, please see
+<a href="/doc/marketing/discounts#7">Discounting Rules</a>.<br />
+<br />
+Monthly payment reports and history belongs to the former partner and this information is not
+transferred.
+<h4>
+    Q. What happens to a game appearing on a Developer or Publisher Homepage when it's been
+    transferred (aka Creator Home pages )?
+</h4>
+A. When a transfer is initiated for an appID, the appID will automatically be removed from all
+<a href="/doc/store/creator_homepage" target="_blank" rel="noreferrer"
+    >Developer or Publisher Homepages</a
+>
+that it is currently listed on. Once the transfer is complete, the appID can be listed on the new
+Developer/Publisher Homepage.
+<h4>Q. What happens to a game's wishlist or followers during a transfer?</h4>
+A. Nothing. The wishlists and followers are tied to the game and will be preserved if ownership is
+transferred.
+<h4>Q. Will the new owner be able to see financial data from before the transfer?</h4>
+A. By default, financial information is only visible to partners from time periods that they were
+paid for the game. Therefore, the new owner will see financial information only from the point of
+transfer and not before. To share financial viewing rights, please see
+<a href="/doc/gettingstarted/managing_apps/sharing">Application Management Sharing</a>.
+<h4>
+    Q. My transferred game is in a bundle that I don't want it to be in. How do I remove it from the
+    old bundle?
+</h4>
+A. Please
+<a
+    href="https://help.steampowered.com/en/wizard/HelpWithPublishing?issueid=901"
+    target="_blank"
+    rel="noreferrer"
+    >send us a ticket</a
+>
+and we can help remove the game from the bundle.

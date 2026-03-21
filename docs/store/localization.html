@@ -1,0 +1,169 @@
+<h1>Localization and Languages</h1>
+<h2 class="bb_section"><a name="1"></a>Overview</h2>
+This guide explains how languages are supported across Steam. Steam is a global platform with full
+official support for 29 languages across many platform features. Supporting as many languages,
+currencies and payment methods as possible enables Steam to provide the best experience possible to
+customers around the world. Over 60% of Steam users use it in a language other than English, so
+tailoring your experience for those users is important.
+<h2 class="bb_section"><a name="2"></a>Types of localization</h2>
+Steam supports two separate types of localization - store page and in-game. You can use either
+independently of each other, but supporting both is ideal.
+<h2 class="bb_section"><a name="store"></a>Managing Store Page Translation</h2>
+Steam allows you to localize your store page content, including written description, images, and
+trailers. You can enter in copy for multiple languages by clicking the language drop down in the top
+right of any text editor inside the Steamworks partner portal.
+<div class="bb_callout">
+    <div>
+        Tip: If you translate the content on your store page into languages that you are considering
+        supporting, you can look at regional wishlists for your game to get a sense of where your
+        game might be popular and which languages might warrant higher priority for translation of
+        your game.
+    </div>
+</div>
+<h2 class="bb_section"><a name="ingame"></a>Managing In-game Translation</h2>
+You can also tell customers what language your product supports in-game. There are options for
+Subtitles, Interface, or Full Audio for each language.<br />
+<br />
+<img
+    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/ingame.PNG"
+    alt="ingame.PNG"
+    title="ingame.PNG"
+/><br />
+<i>Example of in-game language options on Steam</i><br />
+<br />
+If a game supports multiple languages, but the language specific content is small, it isn't
+necessary to break the content into distinct depots. The game can instead use a single depot, and
+ask Steam for the language that the user has selected by using the
+<a href="/doc/api/ISteamApps#GetCurrentGameLanguage">ISteamApps::GetCurrentGameLanguage</a> API.
+This will return one of the API language codes listed in
+<a href="/doc/store/localization/languages">supported languages</a>. You must set the base languages
+that your game supports. You can do that on your
+<a href="/apps/depots/" target="_blank" rel="noreferrer">Manage Depots</a> page.<br />
+<br />
+On the other hand, if your product has a large amount of language specific data, then it's
+recommended that you store that data in separate
+<a href="/doc/store/application/depots">language specific depots</a>. One additional depot per
+language. This way Steam will only deliver the content specific to the language the user is running.
+See <a href="/doc/sdk/uploading">Uploading to Steam</a> for more details on how to build language
+specific Steam depots.
+<h2 class="bb_section"><a name="localized_app_names"></a>Localized Application Names</h2>
+In the General Application Settings of the Steamworks Settings section for your app, you can enter
+localized names for your product. Setting a localized name for a language will cause that name to
+display to customers who run Steam in that language.<br />
+<br />
+<img
+    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/localize_game_name.jpg"
+    alt="localize_game_name.jpg"
+    title="localize_game_name.jpg"
+/><br />
+<br />
+If you set localized names in the Steamworks Settings section, this will override any name set in
+the Store Page section for that language, so that the localized name shown on the Store page will
+always match the localized name the customer sees in the library.<br />
+<br />
+The localized name will be used for search suggestions for customers in that language. The base
+(non-localized) name will also be used as a fallback for search suggestions. Additionally, some
+legacy applications and APIs may not be language-aware and will show the fallback name.<br />
+<br />
+Package Names can be localized as well. Select the package you would like to add a localized name
+to, click edit package name, then add localized name.<br />
+<br />
+<strong>Note:</strong> localizing your game name is subject to the same limitations as changing your
+game name. Please see: <a href="/doc/store/editing/name">Changing Your Game's Name</a> for more
+information.
+<h2 class="bb_section"><a name="3"></a>Localized Community Announcements</h2>
+Announcements posted to your Community Hub and Store page can also be localized. <br />
+<br />
+See the
+<a href="/doc/marketing/event_tools#4" target="_blank" rel="noreferrer"
+    >Localization section of the Steam Events and Announcements tool</a
+>
+for more information.
+<h2 class="bb_section"><a name="4"></a>Best Practices</h2>
+<ul>
+    <li>
+        <strong>Prioritize Your Localization Plan</strong> - You shouldn't feel the need to localize
+        for every language, nor will every language see the same return on investment. Look at your
+        store page traffic, sales, and community feedback to help you make a plan. For an idea of
+        language usage across the whole Steam user base, check out the latest
+        <a href="http://store.steampowered.com/hwsurvey" target="_blank" rel="noreferrer"
+            >Steam Hardware survey</a
+        >
+        and select the 'language' row to expand for details.<br />
+    </li>
+    <li>
+        <strong>Release additional languages as an update.</strong> Use the Community Announcements
+        and <a href="/doc/marketing/visibility">Update Visibility Round</a> tools to let customers
+        know about your new content. You may also consider running a sale if the update is
+        significant enough.<br />
+    </li>
+    <li>
+        <strong>The less a language looks like English, the higher the expected return.</strong>
+        Many customers in Asian territories for example do not speak English, while many customers
+        in European countries do.<br />
+    </li>
+    <li>
+        <strong>Steam favors products that are localized.</strong> Language support is determined by
+        the in-game language settings, not the store page (though if your product is localized, you
+        should consider localizing your store page as well).<br />
+    </li>
+    <li>
+        <strong>Don't confuse language with geography</strong> - Customers on Steam speak different
+        languages and their preferences vary independently of their geographic location.
+        Additionally, if you have additional languages for your product, you should make them
+        available for your entire customer base, not just customers in a specific region.
+    </li>
+</ul>
+<h2 class="bb_section"><a name="5"></a>Achievement Language Support</h2>
+You can localize some of your application's achievement names and descriptions. When you query an
+achievement string through the API, Steam will return the localized information based on the in game
+language the user has selected. You can set up your achievement localization data in the
+<a href="/apps/loc/" target="_blank" rel="noreferrer">Achievement Localization</a> section of the
+App Admin panel.
+<h2 class="bb_section"><a name="6"></a>Gold Master Language Support</h2>
+The Gold Master tool can customize the self installing package to the user language. See the
+<a href="/doc/sdk/goldmaster#localization">Gold Master Localization</a> documentation for details.
+<h2 class="bb_section"><a name="supported_languages"></a>Supported Languages</h2>
+For a full list of supported languages and their associated API language code, please see
+<a href="/doc/store/localization/languages">Languages Supported on Steam</a>
+<h2 class="bb_section"><a name="7"></a>Working With Translation Vendors</h2>
+There are many great translation companies around the world that specialize in translating gaming
+content. As you consider your options for who to work with for translating your game content, there
+are a few things to consider:<br />
+<ul>
+    <li>
+        <strong> Determine your target languages</strong> - Some companies are known to focus or be
+        strong with certain regions’ languages than others.<br />
+    </li>
+    <li><strong>Compare price sheets to know how expensive services are. </strong><br /></li>
+    <li>
+        <strong>See if you need both localization and localization QA </strong>. For example, if you
+        want an unbiased sanity check, you can have one company do the localization and another
+        company do the QA. Alternatively, if you have close communication with members of your
+        community that speak other languages, you may be able to get feedback directly from your
+        players. Think about whether you can set up a way for them to provide you that feedback once
+        you start supporting other languages (eg. by setting up a specific sub-forum or other
+        discussion area).<br />
+    </li>
+    <li>
+        <strong>Consider how difficult your game will be to localize</strong>. Is it text heavy/lore
+        heavy/easy to relate to globally? This can impact which translation vendor may be better
+        suited for particular languages.<br />
+    </li>
+    <li>
+        <strong
+            >Ask for a deck or list of games that a vendor has worked on and ask them exactly what
+            work they did on those games.</strong
+        >
+        Everyone will list their top clients, but might not specify if they did the game content,
+        technical manuals, or even just marketing. Those are all pretty different things, so it’s up
+        to you to follow up and get more information so that you can do more research on your own.
+    </li>
+</ul>
+<h2 class="bb_section"><a name="8"></a>Frequently Asked Questions</h2>
+<strong>Q. How does language support impact visibility of my game?</strong><br />
+A. For information on visibility, please see
+<a href="/doc/marketing/visibility">Visibility on Steam documentation</a><br />
+<br />
+<br />
+<br />

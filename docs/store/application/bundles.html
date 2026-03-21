@@ -1,0 +1,323 @@
+<h1>Bundles</h1>
+<h2 class="bb_section"><a name="Overview"></a>Overview</h2>
+Steam Bundles is a feature that allows multiple products to be bundled together at a discount to
+provide additional value and benefit to your best fans.<br />
+<br />
+<img
+    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/BundlePurchaseOption2.jpg"
+    alt="BundlePurchaseOption2.jpg"
+    title="BundlePurchaseOption2.jpg"
+/><br />
+<br />
+There are two types of Bundles to handle common scenarios:<br />
+<br />
+<ol>
+    <li>
+        <strong>Complete The Set</strong> - Customers that purchase this type of Bundle will pay
+        for, and receive, just the items in that bundle that they don't already have in their Steam
+        library. This is most useful for bundles such as "Collector Pack" or "Franchise Pack" or
+        "Developer Pack" that include two or more products (including games, software, or DLC). The
+        customer can purchase one of these bundles as long as there is one or more item in the
+        bundle they do not already have in their account. These types of Steam Bundles can only be
+        purchased for the account making the transaction and cannot be sent or stored as gifts.<br />
+    </li>
+    <li>
+        <strong>Must Purchase Together</strong> - This is useful for bundles such as "Soundtrack
+        Edition" or "Deluxe Edition" that include just a base game and single piece of DLC or
+        related application (such as a Soundtrack). The customer can purchase this bundle only if
+        they do not already have any of the products in the bundle. These types of Steam Bundles may
+        be purchased as gifts.
+    </li>
+</ol>
+<h2 class="bb_section"><a name="1"></a>How store bundles work</h2>
+Steam Bundles work by applying a discount percentage (defined when creating the bundle) to all of
+the packages in the bundle not already in the account of the purchasing customer.<br />
+<br />
+The three scenarios illustrated below show what the customer ends up paying based on the titles they
+already have and what happens to the price when an item in the bundle is discounted.<br />
+<br />
+<img
+    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/DocumentationIllustration_01-02.png"
+    alt="DocumentationIllustration_01-02.png"
+    title="DocumentationIllustration_01-02.png"
+/>
+<h2 class="bb_section"><a name="2"></a>Why Steam Bundles?</h2>
+<h2 class="bb_subsection"><a name="3"></a>A better experience for your best fans</h2>
+Past Collector Packs were a bad deal for customers that already own one or more of the products in
+the pack. Either it made bad economic sense for those customers to purchase the pack, or they just
+felt bad about doing so since it looks like they were paying for products they already have. The new
+Steam Bundles system addresses this by allowing users to ‘complete the set’ and buy just the rest of
+the bundle for a discount off the items in the bundle that they don’t own.
+<h2 class="bb_subsection"><a name="4"></a>Consistent Discounting</h2>
+Past Complete Packs often got out of sync with pricing when the contents of the packs went on sale,
+resulting sometimes in the pack being more expensive than the individual items. The new Bundles
+system addresses this by automatically adjusting when the contents go on sale so they are
+proportionately always a good deal for customers and don’t require ongoing management on the part of
+developers. We can do this because the bundle is just a specified percentage off the current price
+of the items in the bundle.
+<h2 class="bb_subsection"><a name="5"></a>Simplifying Regional Packages</h2>
+This system also solves a number of region/low violence issues by eliminating the need to have
+multiple Complete Packs configured. Instead, these Bundles will just show the user the items they
+are able to purchase. So if a customer was in Germany, they would be purchasing a bundle and
+automatically get the low violence version of a game where customers in other countries would be
+purchasing the same bundle and automatically get the regular version of the game.
+<h2 class="bb_section"><a name="6"></a>Creating a store bundle</h2>
+When creating a new Steam Bundle there are a few key pieces, as well as some optional settings. You
+must enter a name, a discount, the list of packages to include, and pick the type of bundle.<br />
+<br />
+Note that you need the "Manage pricing and discounts" permission for any game you wish to add to a
+bundle.<br />
+<br />
+<ol>
+    <li>
+        To create a Steam store bundle, select "Bundles" from the "App &amp; Packages" drop-down at
+        the top of the Steamworks site.<br />
+    </li>
+    <li>From that page, you'll find a button for "Create New Bundle". Click that button.<br /></li>
+    <li>
+        You will be asked to name your bundle and enter a discount percentage.<br />
+        <ul>
+            <li>
+                <strong>Bundle Name</strong>: This is the name of the Steam Bundle and appears on
+                the store page for products contained in the bundle.<br />
+            </li>
+            <li>
+                <strong>Store Bundle Discount</strong>: This is the percentage to discount off the
+                price of the individual items in the bundle being purchased by the customer. If it
+                is a Complete The Set bundle, then the price may be different for different
+                customers based on which and how many items in the bundle they already have in their
+                account.<br />
+            </li>
+            <li>
+                <strong>Bundle Type</strong>: You'll need to pick Complete The Set or Must Purchase
+                Together. See definitions in the
+                <a href="#Overview">Overview section</a> above.<br />
+            </li>
+        </ul>
+    </li>
+    <li>
+        Next, you will need to select the packages of your game to include and add any store page
+        details desired.<br />
+        <ul>
+            <li>
+                <strong>List of Packages</strong>: You'll need to pick the list of packages to
+                include in the bundle. These should be the same store packages that are used to sell
+                the products individually. This can include Games, Software, Movies, or DLC.<br />
+                Please see the <a href="/doc/store/application/packages">Packages</a> documentation
+                for information on what packages are and how they work.<br />
+            </li>
+            <li>
+                <strong>Graphical Assets (optional but recommended)</strong>: You can upload a set
+                of capsule images similar to what you created for your app store pages. These images
+                are optional for Bundles, but your bundle can only appear in search results if
+                images have been supplied. For details on the necessary graphical assets, please
+                download our
+                <a
+                    href="https://www.dropbox.com/scl/fo/cvkwbosmrimklcl9h0qko/AF5IPErKP-mQM_3YO1Dw2lA?rlkey=b3ad0izykq367g4luasrinw9z&amp;dl=0"
+                    target="_blank"
+                    rel="noreferrer"
+                    >Bundles Asset Templates</a
+                >. You will upload these by switching to the 'Graphical Assets' tab and uploading
+                the desired capsule images.<br />
+            </li>
+            <li>
+                <strong>Bundle Description (optional)</strong>: You can enter a written description
+                for your bundle. The main "About this bundle" text will appear on the bundle page
+                above the listing of contents. The "Sale Description" text is rarely used--it will
+                appear if your bundle is included in a curated sale that has a specially-created
+                landing page.<br />
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Preview Bundle In Store</strong>: You can preview your bundle page by clicking
+        'Preview Bundle In Store' on the right-hand side. If you uploaded any graphical assets,
+        you'll need to switch to the 'publish' tab and publish in order for your assets to appear on
+        the bundle preview. The preview page may not show all your packages if some of those
+        packages are not yet public on the store. Also, if none of the packages are currently
+        visible, then we can't render a preview page for the bundle. You may want to preview and
+        release your bundle after you release all the products in your bundle.<br />
+        <br />
+        <img
+            src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/AdminUI_preview.jpg"
+            alt="AdminUI_preview.jpg"
+            title="AdminUI_preview.jpg"
+        /><br />
+    </li>
+    <li>
+        Once you're happy with your bundle, you can release by completing the following two
+        steps:<br />
+        <ul>
+            <li>
+                <strong>Publish Assets</strong>: Switch to the 'Publish' tab and click the publish
+                options to make sure that any graphical assets and written description are published
+                out to public servers.<br />
+                <br />
+                <img
+                    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/AdminUI_publish.jpg"
+                    alt="AdminUI_publish.jpg"
+                    title="AdminUI_publish.jpg"
+                /><br />
+            </li>
+            <li>
+                <strong>Enable Bundle</strong>: Click the green-colored 'Set Live' button to make
+                your bundle live for customers. The bundle page itself should be visible
+                immediately, but it will take a few minutes for the bundle to appear listed as a
+                purchase option on each individual product page for the products in the bundle.<br />
+                <br />
+                <img
+                    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/AdminUI_setLive.jpg"
+                    alt="AdminUI_setLive.jpg"
+                    title="AdminUI_setLive.jpg"
+                />
+            </li>
+        </ul>
+    </li>
+</ol>
+<h2 class="bb_section"><a name="7"></a>Maintaining a Bundle</h2>
+Bundles can be modified to add or remove included items, adjust discount percentage, or edit assets
+and/or description.
+<h2 class="bb_subsection"><a name="8"></a>Adding items</h2>
+If you add items to an existing Complete The Set bundle, then customers that have already purchased
+the bundle may do so again to purchase just the new items for the discount percentage. This can be a
+great way to encourage your best fans to get every item of your DLC or every title in your
+franchise.
+<h2 class="bb_subsection"><a name="9"></a>Removing items</h2>
+You can also remove items from an existing bundle at any time as long as at least two items remain
+in the bundle. Removing a package from a bundle does not impact existing customers of a bundle and
+will only affect what packages will be purchased by customers from that point forward.
+<h2 class="bb_section"><a name="visibility"></a>Bundle Visibility</h2>
+Bundles will appear on product store pages just like other purchase options for the game. They can
+also be found by using the store search field. Each bundle has its own detail page, which can
+optionally include branding images and a written description.
+<h2 class="bb_subsection"><a name="visibilitylimits"></a>Limits to Bundle Visibility</h2>
+There are two forms of visibility limitations for bundles on Steam:<br />
+<ol>
+    <li>
+        Game Page Visibility - A maximum of three bundles can appear on any given game store page.
+        If you have more than three bundles that contain a game, only the top three best-selling
+        bundles that contain that game will appear on the game store page.<br />
+    </li>
+    <li>
+        Country-Specific Visibility - A bundle may become unavailable in certain countries based on
+        the price of the packages in that bundle.
+        <ol>
+            <li>
+                <strong>For complete-the-set bundles</strong>, the price of each package in the
+                bundle after all discounts are applied must be above
+                <a href="/pricing/minimums" target="_blank" rel="noreferrer"
+                    >Steam's minimum transaction price</a
+                >
+                in each currency ($0.49 USD adjusted for each currency). For any country where the
+                price of the package in the bundle falls below this minimum, the bundle will become
+                unavailable. This minimum price restriction does not apply for packages that only
+                contain DLC apps.<br />
+            </li>
+            <li>
+                <strong>For must-purchase-together bundles</strong>, the total cost of the bundle
+                must be at least $0.58 USD
+            </li>
+        </ol>
+    </li>
+</ol>
+<h2 class="bb_section"><a name="10"></a>Collaborative Bundles</h2>
+You can create bundles across multiple developers/publishers. For more details, please see
+<a href="/doc/store/application/bundles/collaborative"
+    >Creating Bundles Across Multiple Developers/Publishers</a
+>
+<h2 class="bb_section"><a name="11"></a>Frequently Asked Questions</h2>
+<ul>
+    <li>
+        <strong>Q. Why doesn't the bundle price look right for my developer account?</strong><br />
+        A. The ways that developer accounts are granted games and DLC through auto-grant licenses
+        can confuse the bundle pricing logic. Not to worry; your bundle and the price of your bundle
+        appears correctly to normal players.<br />
+        <br />
+    </li>
+    <li>
+        <strong>Q. Is there a limit on how many Steam Bundles can contain a product?</strong><br />
+        A. You can create as many bundles as you wish that contain a product, but the product store
+        page may only show a maximum of three bundles that contain that product. The store page will
+        show the top selling bundles based on revenue.<br />
+        <br />
+    </li>
+    <li>
+        <strong>Q. What are the rules for which products I can add to a Steam Bundle?</strong><br />
+        A. You can add any game, software, or video that you have the "Manage pricing and discounts"
+        permission for. To edit a bundle, you also need to have one of the following permissions on
+        each app included in the bundle: Edit App Metadata, Edit App Marketing Data, Publish App
+        Changes To Steam.<br />
+        <br />
+    </li>
+    <li>
+        <strong
+            >Q. Can I create a Steam Bundle with games that I do not have publishing rights
+            for?</strong
+        ><br />
+        A. Yes, please check out the new
+        <a href="/doc/store/application/bundles/collaborative" target="_blank" rel="noreferrer"
+            >Collaborative Bundles</a
+        >
+        feature.<br />
+        <br />
+    </li>
+    <li>
+        <strong>Q. Can I change the display order of the packages included in the bundle?</strong
+        ><br />
+        A. Yes, you can drag and drop the order of the packages in your bundle to change the order
+        in which they are displayed on the bundle store page.<br />
+        <br />
+    </li>
+    <li>
+        <strong>Q. Can Steam Bundles be refunded?</strong><br />
+        A. Yes, the individual parts of that bundle may be refunded following the same refund rules
+        for the type of content purchased (game, dlc, movie).<br />
+        <br />
+    </li>
+    <li>
+        <strong
+            >Q. Can I discount a Steam Bundle for a limited time or schedule a discount for a
+            bundle?</strong
+        ><br />
+        A. A bundle has a set percentage that will be discounted off the calculated price of each
+        contained item. The bundle itself cannot be discounted for a limited time, but will adjust
+        in price based on the discounts applied to the contents of a bundle.<br />
+        <br />
+    </li>
+    <li>
+        <strong>Q. How often can I adjust the contents of a Bundle?</strong><br />
+        A. You can add and remove items from your bundle when you need to. But you probably don't
+        need to do this very often aside from adding new products that you've released.<br />
+        <br />
+    </li>
+    <li>
+        <strong>Q. Is there a limit to how deeply I can discount a Bundle?</strong><br />
+        A. You can set a bundle to discount up to 75% off the contained items. However, if the
+        average price of products in your bundle falls below the minimum transaction threshold, the
+        bundle will not appear to customers and cannot be purchased. See
+        <a href="#visibilitylimits">Bundle Visibility</a> above for details.<br />
+        <br />
+    </li>
+    <li>
+        <strong>Q. Can Steam Bundles be purchased as a gift for a friend?</strong><br />
+        A. Steam Bundles configured as "Complete The Set" can only be purchased for your own
+        account. Steam Bundles configured as "Must Purchase Together" may be purchased as a gift for
+        a friend.<br />
+        <br />
+    </li>
+    <li>
+        <strong>Q. Can I request keys for a Steam Bundle?</strong><br />
+        A. Steam Bundles do not have the ability to have keys associated with them. If you need keys
+        that grant users multiple products, you'll need to use a key-only package for those
+        contents. Please contact Valve if you need that package created.<br />
+        <br />
+    </li>
+    <li>
+        <strong>Q. Where can I track unit and revenue sales for my bundles?</strong><br />
+        A. The revenue and units for sales of a bundle are currently just included in the sales
+        indicated for each individual product sold (by package). So, if Game A and Game B were sold
+        together in a bundle, the sale would appear as 1 unit of Game A and 1 unit of Game B. The
+        CSV from the Sales &amp; Activations Reports portal will also indicate if a package sale was
+        recorded as being sold in a bundle.
+    </li>
+</ul>

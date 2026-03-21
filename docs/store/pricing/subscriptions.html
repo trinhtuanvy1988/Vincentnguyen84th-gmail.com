@@ -1,0 +1,90 @@
+<h1>Recurring Subscriptions</h1>
+<div class="bb_callout bb_red bb_fixed">
+    <div>
+        <strong>NOTE:</strong> Recurring Subscriptions is not a fully supported feature. It may not
+        be possible to test all configurations fully prior to the release of your game or software.
+    </div>
+</div>
+<h2 class="bb_section"><a name="1"></a>Overview</h2>
+It is possible to configure recurring subscription billing for a game or software in Steam, though
+it is not well supported at this time.<br />
+<br />
+In many cases, we urge you to consider whether recurring subscription is really the right path for
+your product. Many products have set off down this path and discovered that customer appetite for
+signing up to be billed on a recurring basis is limited and as a result many products have
+subsequently switched to a traditional single up-front payment method.
+<h2 class="bb_section"><a name="2"></a>Methods For Managing Recurring Subscriptions</h2>
+Below is the general method for managing recurring subscriptions on Steam.
+<h4>In-game managed (Microtransactions)</h4>
+The game started a recurring billing by invoking an in-game purchase and confirmed by customer
+through a Steam webpage. This is configured and managed entirely by the game. Please see
+<a href="/doc/features/microtransactions/recurring_billing">Recurring In-Game Billing</a> for
+details on getting this set up.<br />
+<br />
+<strong>General Experience:</strong><br />
+<ul>
+    <li>
+        The game is typically a free-to-play, but could also work with a standard purchaseable
+        game.<br />
+    </li>
+    <li>
+        From within the game, a user would find a purchase option to sign up for a recurring
+        subscription. This would be configured and managed by the developer.<br />
+    </li>
+    <li>
+        Developer-operated Service interfaces with Steam to initiate a subscription, with a renewal
+        period/amount defined.<br />
+    </li>
+    <li>User must approve through the Steam client.<br /></li>
+    <li>Service keeps track of when time runs out for their subscription.<br /></li>
+    <li>
+        When subscription is expired, Service make a ProcessAgreement WebAPI call to charge the next
+        period.<br />
+    </li>
+    <li>
+        Service is not allowed to charge more than the agreed amount in the period (so if the user
+        agreed to $20 a month, they cannot charge more than $20 each month – but may charge
+        less).<br />
+    </li>
+    <li>User is only allowed to cancel this type of subscription.</li>
+</ul>
+<br />
+<strong>Configuration:</strong><br />
+Please see
+<a href="/doc/features/microtransactions/recurring_billing">Recurring In-Game Billing</a> for
+details on getting this set up.
+<h2 class="bb_section"><a name="3"></a>Pricing For Recurring Subscriptions</h2>
+Consider your approach to pricing carefully. While you can lower recurring pricing over time as
+necessary, we do not support increasing the price of a recurring subscription.
+<h2 class="bb_section"><a name="FAQ"></a>Frequently Asked Questions</h2>
+<strong>Q: What payment methods does recurring billing support?</strong><br />
+<strong>A:</strong> Recurring payments can be paid with a credit card, PayPal, or Steam Wallet
+funds.<br />
+<br />
+<strong>Q: Why is payment failing to process when calling ProcessAgreement?</strong><br />
+<strong>A:</strong> If the customer does not have a valid payment method on file, does not have
+sufficient Steam Wallet funds, or has used an expired payment method most recently, then it may fail
+when you call ProcessAgreement.<br />
+<br />
+<strong>Q: Do users get notified when payment has failed?</strong><br />
+<strong>A:</strong> Yes, the user should receive an e-mail when their recurring payment has failed.
+This should instruct them to visit their account page to update their payment information on
+file.<br />
+<br />
+<strong
+    >Q: How often should I try calling ProcessAgreement for a user that has previously
+    failed?</strong
+><br />
+<strong>A:</strong> We recommend making this call once a day for at most a week before giving up. If
+the user has not updated their payment method on file by then, they are likely not coming back.<br />
+<br />
+<strong>Q: What do customers need to know about recurring subscriptions?</strong><br />
+<strong>A:</strong> There is a customer support FAQ
+<a
+    href="https://support.steampowered.com/kb_article.php?ref=8018-TAJK-6238"
+    target="_blank"
+    rel="noreferrer"
+    >here</a
+>
+with some additional information.<br />
+<br />

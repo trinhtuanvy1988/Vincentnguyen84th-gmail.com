@@ -1,0 +1,118 @@
+<h1>Steam Deck and Proton</h1>
+Proton is the compatibility layer that allows Windows games to run on Linux by using a modified
+version of Wine and a collection of high-performance graphics API implementations. The team has been
+working on and improving Proton for a while now, and it has a large amount of coverage. Most APIs
+are already supported by Proton, and most games work out of the box. We're continuing to improve
+Proton compatibility, and our goal is to get as close to full coverage as possible. <br />
+<br />
+To test your game’s Proton compatibility, you will need a Linux environment. You can install Linux
+and Steam on a machine to test, or request a developer kit once they are available (limited
+quantities). Once you are set up in your Linux environment / developer kit, you will be able to use
+the provided debugging tools to run game builds through a remote debugger and profile performance.
+Access to the tools is still a work-in-progress and this page will be updated with more information
+in the coming days.
+<h2 class="bb_section"><a name="1"></a>Proton Anti-Cheat Support</h2>
+Proton supports some common anti-cheat middleware, including Easy Anti-Cheat and BattlEye.<br />
+<ul>
+    <li>
+        <h2 class="bb_subsection"><a name="2"></a>Easy Anti-Cheat</h2>
+        Proton supports Easy Anti-Cheat without requiring any recompilation, but it does require you
+        to manually enable support for your build. For the Epic Online Services version of EAC, see
+        instructions
+        <a
+            href="https://dev.epicgames.com/docs/services/en-US/GameServices/AntiCheat/index.html#linuxwine/protonsupport"
+            target="_blank"
+            rel="noreferrer"
+            >here</a
+        >. For the Kamu version of EAC, follow these steps in order:<br />
+        <ol>
+            <li>
+                Go into the SDK Configuration settings menu on the EAC partner site and enable Linux
+                as a client platform.<br />
+            </li>
+            <li>
+                Go into the Client Module Releases menu on the EAC partner site, choose the Unix
+                platform, and activate a module. If you cannot find the Linux module in the status
+                dashboards, please contact EAC support.<br />
+            </li>
+            <li>
+                Once that's done, download the EAC SDK and find the Linux library
+                (<i>\Client\Assets\Plugins\x86_64\libeasyanticheat.so</i>) for the SDK version
+                integrated with your game, rename it to <i>easyanticheat_x64.so</i>, and add it to
+                your depot next to the Windows library (<i>EasyAntiCheat_x64.dll</i>).<br />
+            </li>
+            <li>
+                Lastly, on the Steamworks site, publish a new build of your game containing the new
+                depot contents. (You don't have to make any changes to the game executable, just
+                include the new files in the depot contents.)
+            </li>
+        </ol>
+    </li>
+    <li>
+        <h2 class="bb_subsection"><a name="3"></a>BattlEye</h2>
+        Proton supports BattlEye and BattlEye-enabled games. Each title requires a manual
+        configuration step, so please email your Valve or BattlEye technical contact for details.
+    </li>
+</ul>
+<br />
+If your title's functionality was previously blocked or limited by anti-cheat, but you've since
+completed the above steps to enable Proton/Steam Deck support, you can resubmit your game for a
+follow-up review. Please see the
+<a href="/doc/steamdeck/compat" target="_blank" rel="noreferrer"
+    >Steam Deck Compatibility Review documentation</a
+>
+for more details.<br />
+<br />
+If you have any questions or concerns, please reach out to your Valve technical contact, or post on
+the Steam Deck Steamworks Development forum at
+<a
+    href="https://steamcommunity.com/groups/steamworks/discussions/27/"
+    target="_blank"
+    rel="noreferrer"
+    >https://steamcommunity.com/groups/steamworks/discussions/27/</a
+>
+.
+<h2 class="bb_section"><a name="4"></a>Known Proton Issues</h2>
+Below are a few recommendations around areas that have been known to be Proton compatibility issues
+and likely to induce delays in Proton fully supporting a given title after it launches on Steam:<br />
+<ul>
+    <li>
+        .NET / WPF: Our recommendation is to use standalone technologies like Qt for launchers
+        instead of OS-dependent frameworks like .NET / WPF. For best results, skip separate
+        launchers altogether and integrate their functionality into the game client UI instead,
+        where controller support is likely better.<br />
+    </li>
+    <li>
+        Media Foundation: To save additional bandwidth and disk use, we recommend using standalone
+        codecs like VP9 or AV1.<br />
+    </li>
+    <li>
+        Anti-cheat: We recommend using user-space anti-cheat components for best results, as they
+        can typically run in the Wine environment and provide the same level of functionality.
+        Kernel-space solutions are not currently supported and are not recommended. Note: we have
+        been working with most anti-cheat technology providers to provide Proton compatibility. If
+        your solution currently isn't working, please reach out to both your vendor and Valve for
+        support.<br />
+    </li>
+    <li>
+        Anti-tamper / DRM: In general we don't recommend use of such solutions across any PC
+        platforms, as they may impact disk usage and overall performance. Getting them fully
+        functional in the Wine environment can take some time and add significant latency to getting
+        your title supported.
+    </li>
+</ul>
+<h2 class="bb_section"><a name="5"></a>Reporting Issues</h2>
+If you see any issues with your game on Proton not mentioned above, please report them to the
+<a
+    href="https://steamcommunity.com/groups/steamworks/discussions/13/"
+    target="_blank"
+    rel="noreferrer"
+    >Steamworks Forum</a
+>,
+<a href="https://github.com/ValveSoftware/Proton/issues" target="_blank" rel="noreferrer"
+    >GitHub tracker</a
+>, or through your Valve contact. We are constantly working on and improving Proton support, and
+your reports are incredibly helpful.
+<h2 class="bb_section"><a name="6"></a>Setting up a Linux Test Environment</h2>
+You can test your game on Proton now, by setting up a Linux test environment. It's free--all you
+need is a PC. For the full instructions, see <a href="/doc/steamdeck/testing">steamdeck/testing</a>.

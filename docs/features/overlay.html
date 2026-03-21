@@ -1,0 +1,150 @@
+<h1>Steam Overlay</h1>
+<h2 class="bb_section"><a name="overview"></a>Overview</h2>
+The Steam overlay is a piece of the Steam user interface that can be activated over the top of
+almost any game launched through Steam. It lets the user access the friends list, web browser, chat,
+and in-game DLC purchasing.<br />
+<br />
+The default key for a user to access the overlay while in a game is SHIFT+TAB, but they can change
+it in their Steam-&gt;Settings dialog.
+<h2 class="bb_section"><a name="requirements"></a>Requirements</h2>
+Your game does not need to do anything special for the overlay to work, it automatically hooks into
+any game launched from Steam! While in development and running your game in a debugger, the overlay
+is loaded when you call <a href="/doc/api/steam_api#SteamAPI_Init">SteamAPI_Init</a>. As such you'll
+need to make sure to call <a href="/doc/api/steam_api#SteamAPI_Init">SteamAPI_Init</a> prior to
+initializing the OpenGL/D3D device, otherwise it won't be able to hook the device creation.<br />
+<br />
+The overlay supports games that use DirectX 7 - 12, OpenGL, Metal, and Vulkan. The overlay will not
+be active in software-rasterized games.<br />
+<br />
+macOS: Overlay support for 10.15 (Catalina) requires adding entitlements to your build
+configuration. Details are provided on the
+<a href="/doc/store/application/platforms" target="_blank" rel="noreferrer">platforms</a> page.
+<div class="bb_callout">
+    <div>
+        <strong>NOTE:</strong> The overlay is automatically disabled for 'Software' app types. If
+        you need the overlay enabled, you can do so by:<br />
+        <ul>
+            <li>Making sure your Steam account has the Edit App Metadata permission<br /></li>
+            <li>
+                Navigate from the App's landing page to &gt; Edit Steamworks Settings &gt;
+                Installation tab &gt; General Installation<br />
+            </li>
+            <li>Check box for Enable Steam Overlay for Application<br /></li>
+            <li>Publish</li>
+        </ul>
+    </div>
+</div>
+<h2 class="bb_section"><a name="activating"></a>Activating the overlay from your app</h2>
+There are a set of functions in the Steamworks API that give you direct access to triggering the
+game overlay.<br />
+<ul>
+    <li>
+        <a href="/doc/api/ISteamFriends#ActivateGameOverlay">ISteamFriends::ActivateGameOverlay</a
+        ><br />
+        This function can open the game overlay to the dialog specified.<br />
+    </li>
+    <li>
+        <a href="/doc/api/ISteamFriends#ActivateGameOverlayToUser"
+            >ISteamFriends::ActivateGameOverlayToUser</a
+        ><br />
+        This function can open the game overlay to the dialog specified, with the user passed in as
+        context.<br />
+    </li>
+    <li>
+        <a href="/doc/api/ISteamFriends#ActivateGameOverlayToWebPage"
+            >ISteamFriends::ActivateGameOverlayToWebPage</a
+        ><br />
+        This function can open the game overlay to its web browser, and loads the specified url. It
+        needs to be a full url, e.g.
+        <a href="http://www.steamgames.com/" target="_blank" rel="noreferrer"
+            >http://www.steamgames.com/</a
+        >.<br />
+    </li>
+    <li>
+        <a href="/doc/api/ISteamFriends#ActivateGameOverlayToStore"
+            >ISteamFriends::ActivateGameOverlayToStore</a
+        ><br />
+        This function can open the game overlay to the buy DLC for the current game (see
+        <a href="/doc/store/application/dlc">Downloadable Content (DLC)</a> for more info)<br />
+    </li>
+    <li>
+        <a href="/doc/api/ISteamUtils#SetOverlayNotificationPosition"
+            >ISteamUtils::SetOverlayNotificationPosition</a
+        ><br />
+        Sets which corner of the screen you want notifications ('toasts') to appear. Default is the
+        bottom-right corner of the screen.<br />
+    </li>
+    <li>
+        <a href="/doc/api/ISteamUtils#IsOverlayEnabled">ISteamUtils::IsOverlayEnabled</a><br />
+        Returns true if the overlay is running &amp; the user can access it. The overlay process
+        could take a few seconds to start &amp; hook the game process, so this function will
+        initially return false while the overlay is loading.
+    </li>
+</ul>
+<h2 class="bb_section"><a name="callbacks"></a>Communication from the overlay to your game</h2>
+The following signals (callbacks) are sent from Steam to your game, based on user action in the
+overlay:<br />
+<ul>
+    <li>
+        <a href="/doc/api/ISteamFriends#GameOverlayActivated_t">GameOverlayActivated_t</a><br />
+        Posted when game overlay activates or deactivates. The game can use this to pause or resume
+        single player games.<br />
+    </li>
+    <li>
+        <a href="/doc/api/ISteamFriends#GameServerChangeRequested_t">GameServerChangeRequested_t</a
+        ><br />
+        Posted when the user selects a friends game to join, contains details about the game server
+        to join.<br />
+    </li>
+    <li>
+        <a href="/doc/api/ISteamFriends#GameLobbyJoinRequested_t">GameLobbyJoinRequested_t</a><br />
+        Posted when the user selects a friends game to join, contains details about the lobby to
+        join.
+    </li>
+</ul>
+<h2 class="bb_section"><a name="FAQ"></a>Frequently Asked Questions</h2>
+<strong>NOTE:</strong> You may find additional answers on the customer facing support site such as
+this topic:
+<a
+    href="https://support.steampowered.com/kb_article.php?ref=9394-yofv-0014"
+    target="_blank"
+    rel="noreferrer"
+    >Steam Community Overlay does not Activate</a
+>.
+<h4>Q. Why is the Steam overlay crashing my app?</h4>
+<strong>A.</strong> The Steam overlay is used in thousands of games and as such it has been very
+thoroughly tested and is rarely the cause of a crash. However, because of the way it injects itself
+into the game, it does often expose memory leaks or memory corruption in the usage of your rendering
+API that may not have impacted game play.<br />
+<br />
+To diagnose overlay crashes with DirectX for example, try to determine how D3D got into a bad state
+by using the d3d debug runtime with all (info/warning/error/notice) level spew turned on. It might
+give some hints to orphaned d3d resources. If you don’t find anything that way there may be a more
+general memory corruption issue. If these always occur on shutdown then it’s likely a shutdown
+ordering issue with the game not cleaning up as it shuts down.<br />
+<br />
+If after debugging the app is still crashing in the overlay, please notify us in the
+<a href="http://steamcommunity.com/groups/steamworks/discussion" target="_blank" rel="noreferrer"
+    >Steamworks Development Group</a
+>.
+<h4>Q. Why isn't the Steam overlay showing up in my app?</h4>
+<strong>A.</strong> First ensure that you meet the <a href="#requirements">Requirements</a> above.
+If you do meet the requirements and it's still not showing up, make sure you're launching the app
+through the Steam client, either directly from the lobby/quick launch list, or by calling
+<a href="/doc/api/steam_api#SteamAPI_RestartAppIfNecessary">SteamAPI_RestartAppIfNecessary</a>.
+<h4>Q. My game is using D3D12 on Win7, and the Steam overlay is not working. Why?</h4>
+<strong>A.</strong> Please refer to this
+<a
+    href="https://microsoft.github.io/DirectX-Specs/d3d/D3D12onWin7.html#add-support-to-d3d11on12"
+    target="_blank"
+    rel="noreferrer"
+    >Microsoft document</a
+>
+on how to add Steam overlay support.
+<h4>Q. My game runs in a browser. Can the Overlay work in that?</h4>
+<strong>A.</strong> The Steam Overlay requires a game consistently render frames, not pausing
+rendering or rendering only part of the screen based on dirty rects. Unfortunately, web browsers do
+not support this model. A workaround for web based games is to host an embedded Chromium inside a
+native application, with a D3D window and input forwarding to the embedded Chromium. That can be
+setup to render in offscreen mode, which then renders the resulting chromium texture each frame in
+the native app. Partners often use CEF to do this, though this is not an easy task.

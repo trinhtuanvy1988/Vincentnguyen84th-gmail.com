@@ -1,0 +1,182 @@
+<h1>Steamworks API Reference</h1>
+Welcome to the Steamworks API Reference!<br />
+<br />
+This section provides a complete listing of everything available in the Steamworks API. You should
+head over to the <a href="/doc/sdk/api">Steamworks API Overview</a> before diving in to get setup
+using the Steamworks API.<br />
+<br />
+For an overview of features provided by the Steamworks API take a look at
+<a href="/doc/features">Features</a>.<br />
+<br />
+If you are using the Web API, you can find documentation for it on the
+<a href="/doc/webapi">Steamworks Web API Reference</a>.<br />
+<br />
+<table>
+    <tbody>
+        <tr>
+            <th>Interface</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamApps">ISteamApps</a></td>
+            <td>
+                Exposes a wide range of information and actions for applications and
+                <a href="/doc/store/application/dlc">Downloadable Content (DLC)</a>.
+            </td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamAppTicket">ISteamAppTicket</a></td>
+            <td>
+                Interface to get app ownership data. This is used by the Steam DRM wrapper to let it
+                ask about ownership with greater confidence.
+            </td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamClient">ISteamClient</a></td>
+            <td>
+                Interface to create a new steam instance or to connect to an existing steam
+                instance, whether it's in a different process or is local.
+            </td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamController">ISteamController</a></td>
+            <td>Steam Controller support API (deprecated and replaced with ISteamInput)</td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamFriends">ISteamFriends</a></td>
+            <td>
+                Interface to access information about individual users and interact with the
+                <a href="/doc/features/overlay">Steam Overlay</a>.
+            </td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamGameCoordinator">ISteamGameCoordinator</a></td>
+            <td>Functions for sending and receiving messages from the Game Coordinator.</td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamGameServer">ISteamGameServer</a></td>
+            <td>Provides the core of the Steam Game Servers API.</td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamGameServerStats">ISteamGameServerStats</a></td>
+            <td>Functions to allow game servers to set stats and achievements on players.</td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamHTMLSurface">ISteamHTMLSurface</a></td>
+            <td>Interface for rendering and interacting with HTML pages.</td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamHTTP">ISteamHTTP</a></td>
+            <td>A small and easy to use HTTP client to send and receive data from the web.</td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamInput">ISteamInput</a></td>
+            <td>Interface for supporting Xbox, PlayStation, Switch and Steam Controllers.</td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamInventory">ISteamInventory</a></td>
+            <td>Steam Inventory query and manipulation API.</td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamMatchmaking">ISteamMatchmaking</a></td>
+            <td>
+                Functions for clients to access matchmaking services, favorites, and to operate on
+                game lobbies.
+            </td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamMatchmakingServers">ISteamMatchmakingServers</a></td>
+            <td>Functions which provide access to the game server browser.</td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamMusic">ISteamMusic</a></td>
+            <td>Functions to control music playback in the steam client.</td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamMusicRemote">ISteamMusicRemote</a></td>
+            <td>Allows direct interaction with the Steam Music player.</td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamNetworking">ISteamNetworking</a></td>
+            <td>
+                Networking functions for making connections and sending data between clients,
+                traversing NATs when possible.
+            </td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamNetworkingSockets">ISteamNetworkingSockets</a></td>
+            <td>
+                Newer networking API. Higher performance API that relays data through the Valve
+                network and protects player IP addresses.
+            </td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamNetworkingUtils">ISteamNetworkingUtils</a></td>
+            <td>
+                Misc networking utilities useful when using
+                <a href="/doc/api/ISteamNetworkingSockets">ISteamNetworkingSockets</a>
+            </td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamRemotePlay">ISteamRemotePlay</a></td>
+            <td>Functions for getting information about Steam Remote Play sessions.</td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamRemoteStorage">ISteamRemoteStorage</a></td>
+            <td>
+                Provides functions for reading, writing, and accessing files which can be stored
+                remotely in the Steam Cloud.
+            </td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamScreenshots">ISteamScreenshots</a></td>
+            <td>Functions for adding screenshots to the user's screenshot library.</td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamTimeline">ISteamTimeline</a></td>
+            <td>Functions for adding events to the game recording timeline.</td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamUGC">ISteamUGC</a></td>
+            <td>
+                Functions to create, consume, and interact with the
+                <a href="/doc/features/workshop">Steam Workshop</a>.
+            </td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamUser">ISteamUser</a></td>
+            <td>Functions for accessing and manipulating Steam user information.</td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamUserStats">ISteamUserStats</a></td>
+            <td>
+                Provides functions for accessing and submitting stats, achievements, and
+                leaderboards.
+            </td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamUtils">ISteamUtils</a></td>
+            <td>Interface which provides access to a range of miscellaneous utility functions.</td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/ISteamVideo">ISteamVideo</a></td>
+            <td>
+                Provides functions to interface with the Steam video and broadcasting platforms.
+            </td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/SteamEncryptedAppTicket">SteamEncryptedAppTicket</a></td>
+            <td>Utilities to decode/decrypt encrypted application tickets.</td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/steam_api">steam_api</a></td>
+            <td>Provides the core foundation to initialize and access the Steamworks API.</td>
+        </tr>
+        <tr>
+            <td><a href="/doc/api/steam_gameserver">steam_gameserver</a></td>
+            <td>
+                Provides the core foundation to initialize and access the Steamworks GameServer API.
+            </td>
+        </tr>
+    </tbody>
+</table>

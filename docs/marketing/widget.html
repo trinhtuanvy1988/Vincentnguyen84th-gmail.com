@@ -1,0 +1,67 @@
+<h1>Store Widget</h1>
+<h2 class="bb_section"><a name="1"></a>Overview</h2>
+For any game with a visible purchase option in the Steam store, you can create a widget with
+information about your product, current price, any discounts, and a purchase button to help you
+promote and display your title anywhere.<br />
+<br />
+<img
+    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/widget-example-firewatch-purchase.png"
+    alt="widget-example-firewatch-purchase.png"
+    title="widget-example-firewatch-purchase.png"
+/><br />
+<br />
+<img
+    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/widget-example-manor-upcoming.png"
+    alt="widget-example-manor-upcoming.png"
+    title="widget-example-manor-upcoming.png"
+/>
+<h2 class="bb_section"><a name="2"></a>Widget Functionality</h2>
+Creating a widget for a released game will show a buy button and the price of the game. In this
+case, clicking the "Buy on Steam" button from the widget will take customers to the Steam website
+with the item in their cart where they can easily complete the purchase process and pay with
+whatever method they prefer, including funds from their Steam Wallet.<br />
+<br />
+Creating a Steam widget for an unreleased game will generate a widget with an "Add to Wishlist"
+button instead of a "Buy on Steam" button.
+<h2 class="bb_section"><a name="3"></a>Creating your Widget</h2>
+To create your Steam widget, you will need to head over to your public store page in Steam. This
+widget will keep up to date as you change your product price or discount, add platforms, or update
+your branding image. <br />
+<br />
+<ol>
+    <li>
+        On the right-hand side of your product page in the Steam Store, click the "Embed" button.
+        <br />
+    </li>
+    <li>
+        If you have more than one purchase option, you will be prompted to pick which of your
+        purchase options (and price) you wish your widget to display.<br />
+    </li>
+    <li>
+        You will also see a box that is pre-populated with the first part of your product
+        description. You can edit this to say whatever you want about your product.<br />
+    </li>
+    <li>Hit "Create Widget".<br /></li>
+    <li>
+        You will now see a preview of your widget along with the HTML, which you will need to copy
+        and paste into your website or blog where you wish to display it.
+    </li>
+</ol>
+<h2 class="bb_section"><a name="4"></a>Measuring Engagement</h2>
+Steam's
+<a href="/doc/marketing/utm_analytics" target="_blank" rel="noreferrer">UTM Analytics</a> provides
+visit and conversion data for Store widgets. By default, widgets will include utm_source=steamwidget
+on links to your Store page, including on the purchase button. On the UTM Analytics dashboard filter
+to utm_source=steamwidget to view visit and conversion data for your widget.<br />
+<br />
+You can optionally include your own UTM parameters on the Steam widget's iframe link if you want to
+be able to track conversions from different places that you have the widget embedded. These
+parameters will be included on links to your Store page within the widget. If you provide a
+utm_source it will override the default utm_source=steamwidget. Here's an example<br />
+<div class="bb_code">
+    &lt;iframe
+    src="https://store.steampowered.com/widget/500/?utm_source=homepage&amp;utm_campaign=mycampaign"&gt;&lt;/iframe&gt;
+    // UTM parameters are included on Store page links within the widget &lt;a
+    href="https://store.steampowered.com/app/500/?utm_source=homepage&amp;utm_campaign=mycampaign"/&gt;
+</div>
+<br />

@@ -1,0 +1,515 @@
+<h1>Steam Playtest</h1>
+Steam Playtest gives developers a free, low-risk way to get playtesting data for their game without
+stressing out about Steam keys, user reviews, or wishlists. By using a separate “child” appID that
+is associated with, but separate from your main game, you can do the playtesting you need without
+interfering with your main game.<br />
+<br />
+Here's an overview:<br />
+<a href="https://youtu.be/0_HhCEJ_kZ0" target="_blank" rel="noreferrer"
+    >https://youtu.be/0_HhCEJ_kZ0</a
+><br />
+<br />
+Steam Playtest also lets you easily gate access to your playtest. You can let in as many or as few
+players as you need, and deactivate the playtest app when you wish.
+<h2 class="bb_section"><a name="1"></a>How does it work?</h2>
+A Steam Playtest appID has access to the same Steamworks technical features as your main game - but
+with reduced store and community setup. Instead of having its own separate store page, your Steam
+Playtest signup will live right on your main game, so that customers can sign up and access the
+playtest but still Wishlist or Follow the main game. <br />
+<br />
+Here’s what a Steam Playtest signup looks like to customers:<br />
+<br />
+<img
+    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/new_join_playtest.png"
+    alt="Join the Playtest"
+    title="Join the Playtest"
+/><br />
+<br />
+Potential testers will be able to request access to your Steam Playtest if they're interested. When
+you're ready for testers to try it out, you can add as many as you'd like from the group of
+interested players. You can deactivate your Playtest app when you're ready - or leave it available
+if you want to keep experimenting with upcoming features.
+<h2 class="bb_section"><a name="2"></a>How do I set it up?</h2>
+<ol>
+    <li>
+        Create a new Playtest app from the <i>Associated Packages &amp; DLC </i>page for your
+        game.<br />
+        <br />
+        <img
+            src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/playtest_create_screenshot0.png"
+            alt="Create a new Playtest"
+            title="Create a new Playtest"
+        /><br />
+        <br />
+    </li>
+    <li>
+        Configure your application in Steamworks. <br />
+        <br />
+        At minimum, you must provide required library capsule assets and community assets (see
+        <a href="/doc/store/assets/libraryassets">Library Assets</a>). You can also change the
+        customer-visible name for your Playtest app (<a href="/doc/store/localization"
+            >including localized names</a
+        >) - you won't be able to change this after it's released.<br />
+        <br />
+    </li>
+    <li>
+        When you're ready, complete the release process for your Playtest app. This will include a
+        simplified store page and build review. <strong>Note</strong>: Your playtest will
+        <i>not </i>have its own unique store page, it will only show up as a section on the base
+        game's page. The store review checklist for a Playtest only consists of capsule images and
+        icons.<br />
+        <br />
+    </li>
+    <li>
+        You can start allowing Steam Playtest signups by making it visible on the store page of your
+        main game. Go to the Special Settings tab of the Edit Store Page admin tools for your main
+        game to enable signups. Once you publish the change to this page, customers will see the
+        sign up option in the Steam store.<br />
+        <br />
+        <img
+            src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/playtest_special_settings_screenshot0.png"
+            alt="playtest_special_settings_screenshot0.png"
+            title="playtest_special_settings_screenshot0.png"
+        /><br />
+        <br />
+        You will be able to show or hide Playtest signups whenever you like.<br />
+        <br />
+    </li>
+    <li>
+        Now that customers are signing up for your Steam Playtest, you can prepare your content for
+        them. Upload depots and set up builds on the Playtest just like any other game or demo. You
+        can integrate Steamworks technical features, set Steam Input templates, configure cloud
+        saves, and so on. If you’ve never done any of that before, start with our
+        <a href="/doc/sdk/uploading">Uploading to Steam documentation</a> for help.<br />
+        <br />
+        As an alternative, you can request Steam keys for your Steam Playtest app and distribute
+        those to playtesters directly. Please see the section below for more information.<br />
+        <br />
+    </li>
+    <li>
+        When your Playtest is ready and your build is live, you can start accepting players. In the
+        Steamworks Settings for your Playtest App, follow the Manage Your Playtest link (or find
+        Playtest Settings under the Application tab). You can add groups of players when you're
+        ready. Players are selected randomly from the pool of signups.<br />
+        <br />
+        You can also choose specific countries in the event that you have limited server
+        availability and want to make sure latency is not an issue during your playtest.<br />
+        <br />
+        <img
+            src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/granting.png"
+            alt="granting.png"
+            title="granting.png"
+        /><br />
+        <br />
+    </li>
+    <li>
+        Once you’re done collecting playtesting data, you can deactivate the playtest by setting to
+        "Not Playable" from the Steam Playtest partner settings page. This option will not be shown
+        while signups are being accepted on the Steam store. After deactivation, Steam will not
+        launch the playtest app.<br />
+        <br />
+        Be thoughtful about this action! You might frustrate or disappoint your community if you
+        take away the experience without communicating it beforehand, so it probably makes sense to
+        set expectations in advance. You can use
+        <a href="/doc/marketing/event_tools" target="_blank" rel="noreferrer"
+            >Steam Events and Announcements</a
+        >
+        to communicate your playtest details.<br />
+        <br />
+    </li>
+    <li>
+        If you want to restart your Playtest after it's ended, perhaps you made some changes or
+        increased server capacity, you can set your Playtest to Visible again. Players that already
+        had been granted access will still have access and do not need to signup or be granted
+        access again.
+    </li>
+</ol>
+<h2 class="bb_section"><a name="3"></a>Signup Type</h2>
+The default behavior is limited signup - potential playtesters request access, and you grant access
+in batches as you have capacity to accept them. <br />
+<br />
+If your game is ready for more people, you can also set your playtest to Open signup: as players
+request access from the base game store page, they will be automatically added.<br />
+<br />
+Changing from a limited-signup playtest (the default) will kick off a process that accepts any
+pending playtesters. This will generally start within a few minutes.<br />
+<br />
+The signup type option is also controlled from the Steam Playtest page on the partner site. You can
+change the signup type whenever you need.
+<h2 class="bb_section"><a name="4"></a>Using Steam Keys for your Steam Playtest</h2>
+<br />
+You can distribute Steam keys for your Playtest. Your Playtest does not require a public signup, and
+you can generate and distribute keys for a Playtest even if your store page is not live yet. This
+should give you fine-grained control to implement the testing rollout plan you have designed for
+your game.<br />
+<br />
+Most developers will find using Playtest keys easier and safer to work with than Release State
+Override keys for their base game. The Playtest can support larger key rollouts much easier--you
+will typically be limited to 2,500 Release State Override keys for your base game but you can
+generally request much larger quantities of Playtest keys. Additionally, you can control access to
+the Playtest using the Playable setting. Note that a key, once granted, is not revoked if the
+Playtest is later marked Not Playable.<br />
+<br />
+To use Steam Keys for your Steam Playtest, follow these steps:<br />
+<br />
+<ul>
+    <li>
+        Request Steam keys for your Steam Playtest app. You can only request Standard Release Steam
+        keys for your playtest, which means that once the key is activated the playtest will only be
+        playable when it is "released", i.e. Playtest Status: Playable. It's not possible to request
+        Release State Override (beta) Steam keys for a Steam Playtest.<br />
+    </li>
+    <li>
+        Set your Steam Playtest to "playable". It's not a requirement that your Steam store page is
+        publicly visible on Steam to run your playtest using Steam keys.<br />
+    </li>
+    <li>
+        When you want to stop playtesting, you can set your Steam Playtest app to "not playable".
+        Note that a key, once granted, is not automatically revoked if the Playtest is later marked
+        Not Playable.
+    </li>
+</ul>
+<br />
+While Steam keys are a free service Steam provides for developers to run their playtests, they are
+not unlimited. When you are at the point when you want to request more than 50,000 keys for your
+Steam Playtest, your playtest is effectively an open beta and you should feel comfortable opening
+signups on your Steam store page. Valve looks at each request on a case by case basis and reserves
+the right to reject Steam Key requests.<br />
+<br />
+If you have any questions, please reach out to us and
+<a
+    href="https://help.steampowered.com/en/wizard/HelpWithPublishing"
+    target="_blank"
+    rel="noreferrer"
+    >submit a ticket</a
+>. You can also view our Steam Key rules and guidelines
+<a href="/doc/features/keys" target="_blank" rel="noreferrer">here</a>.
+<h2 class="bb_section"><a name="5"></a>Confidential Playtests for Unannounced Games</h2>
+<br />
+Be cautious whenever running a confidential playtest for an unannounced game. Even when configured
+properly, a confidential playtest will only ever be as confidential as your "least confidential"
+playtester and any leaked details from your playtest, including screenshots or videos, could
+potentially spread around the internet in moments. For these reasons, it's best to announce your
+game first, before running any external playtests outside of your organization. <br />
+<br />
+However, if you really want to run a confidential playtest for an unannounced game (sometimes called
+a "friends &amp; family" alpha), the most secure way to attempt this is via Release Override Steam
+keys on the <i>unreleased</i> base app (i.e. not a Playtest App). Keep in mind that maintaining
+confidentiality requires a few extra steps, risks, and considerations:<br />
+<br />
+<ol>
+    <li>
+        Players accepting a Steam key for a confidential playtest aren’t under nondisclosure
+        agreements (NDAs) with you, so you'll need your own solution if you want to register them
+        and ensure they've agreed to an NDA prior to receiving a key. Once they've successfully
+        registered, you'll also need your own solution for securely distributing a Release State
+        Override key to them. <br />
+        <br />
+    </li>
+    <li>
+        Your playtesters may have installed 3rd party apps or web extensions that automatically
+        surface information on anything their Steam client is running, even unreleased or
+        unannounced games. Some of these 3rd party programs may even prompt the playtester for more
+        information about your unannounced game, for example: "We don't recognize this game, can you
+        tell us more about it?" <br />
+        <br />
+    </li>
+    <li>
+        For extra security, consider using a nondescript codename for your unannounced game. Of
+        course, you'll need to update the name later before your game is announced and releases its
+        Coming Soon store page. <br />
+        <br />
+    </li>
+    <li>
+        Release State Override keys are limited to 2,500 per app. If you need more than 2,500 keys
+        for a confidential playtest, then the probability of a leak is increasing to the point where
+        you're likely "announcing" your product anyway. In this case, you should instead consider
+        announcing your base game first, and then running your external playtest via a normal
+        playtest app, which will enable you to request up to 50,000 keys. <br />
+        <br />
+    </li>
+    <li>
+        Don't Forget! Release State Override keys will continue to grant access to the base game
+        until they are banned, so be sure to read up on
+        <a href="/doc//features/keys#6">key management</a> and have a plan in place for your Release
+        Override keys after your confidential playtest is over.
+    </li>
+</ol>
+<div class="bb_callout">
+    <div>
+        <strong>Surfacing an App on Steam</strong>: Keys aside, details of an app on Steam will
+        become visible to many players and/or third party web crawlers once the app: 1) publishes a
+        Store page, 2) becomes available for Pre-Load or 3) gets Released, even if it is released
+        with a 'Hidden' store page. Be sure to plan your announcement for <i>no later</i> than the
+        first time your app enters any of these states.
+    </div>
+</div>
+<h2 class="bb_section"><a name="6"></a>Common Configurations</h2>
+<strong>Playtest is NOT playable and NOT accepting sign-ups. </strong> <br />
+This is the default configuration when you initially set up your playtest before setting it live or
+accepting sign-ups. It will also be the final configuration, once you are completely done running
+your playtest.<br />
+<br />
+<img
+    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/notplayablehidden.png"
+    alt="notplayablehidden.png"
+    title="notplayablehidden.png"
+/><br />
+<br />
+<strong>Playtest is NOT playable, but is accepting new sign-ups.</strong> <br />
+This is the configuration you would likely set up initially to have players sign up prior to your
+playtest ever being available. You might also want this configuration if you’ve ended a playtest,
+but are planning on doing another one in the future and would like to add more playtesters to the
+future playtest event.<br />
+<br />
+<img
+    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/notplayablevisible.png"
+    alt="notplayablevisible.png"
+    title="notplayablevisible.png"
+/><br />
+<br />
+<strong>Playtest is playable and accepting new sign-ups.</strong> <br />
+This might be the right setting for when your playtest is live and you plan on adding more
+playtesters in the future, perhaps you will be expanding server capacity or adding new features, and
+will need more playtesters to try out a future build.<br />
+<br />
+<img
+    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/playablevisible.png"
+    alt="playablevisible.png"
+    title="playablevisible.png"
+/><br />
+<br />
+<strong>Playtest is playable, but NOT accepting new sign-ups.</strong> <br />
+You may want this configuration if you are not planning on admitting any additional playtesters in
+the future but still want your current playtesters to have access to the build.<br />
+<br />
+<img
+    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/playablehidden.png"
+    alt="playablehidden.png"
+    title="playablehidden.png"
+/>
+<h2 class="bb_section"><a name="friend_invites"></a>Friend Invites - BETA</h2>
+Friend Invites is an experimental new way to add players to your Steam playtest, designed for
+multiplayer games that benefit from playing with your friends.<br />
+<br />
+When enabled, users with access can invite their friends to join the playtest, and those friends can
+invite their friends, and so on.<br />
+<br />
+Players can invite their friends within Steam. When invited, a player receives a notification
+letting them know they have been invited by a friend to join the playtest. <br />
+<br />
+<img
+    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/friendinvite3.png"
+    alt="friendinvite3.png"
+    title="friendinvite3.png"
+/><br />
+<img
+    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/friendinvite2.JPG"
+    alt="friendinvite2.JPG"
+    title="friendinvite2.JPG"
+/><br />
+<br />
+<br />
+Like other Steam playtest options, everything can be configured in the dashboard.<br />
+<br />
+<img
+    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/invitefriends1.png"
+    alt="invitefriends1.png"
+    title="invitefriends1.png"
+/><br />
+<br />
+Using the dashboard, you can specify the number of invites each player gets:<br />
+1, 2, or 3<br />
+<br />
+You can also enable friend invites or pause new friend invites anytime with a few clicks.<br />
+<br />
+When friend invites are enabled, growth can compound quickly, so this feature is best for games with
+robust server capacity.
+<u
+    >If you are concerned about your playtest growing too fast for you to support, this feature may
+    not be for you.</u
+><br />
+<br />
+If you want to limit Friend Invite growth, you have a few options:<br />
+<ul>
+    <li>
+        Monitor users with access to your playtest via the playtest dashboard and pause new invites
+        when you reach a number you're comfortable supporting<br />
+    </li>
+    <li>
+        Limit friend invite capability to just players who joined by a certain date, capping the
+        potential number of invites. You can configure this in the Friend Invites option.
+    </li>
+</ul>
+<br />
+Example:<br />
+You have configured your Friend Invites to 3 invites for each player, and you have 5,000 current
+players with access to your playtest. You configure your Friend Invites to only apply to users who
+have access as of today. That would limit potential invites to 15,000 total, as only users who had
+access as of today can send new invites.
+<h2 class="bb_subsection"><a name="7"></a>Important notes about Friend Invites</h2>
+<div class="bb_callout">
+    <div>
+        <strong>Prerequisite: </strong>Users can only invite friends they have been friends with for
+        at least 30 days.
+    </div>
+</div>
+<div class="bb_callout">
+    <div>
+        <strong>Duration:</strong> Once an invite is sent, it will remain active, even if you pause
+        friend invites. Pausing friend invites simply stops new invites from being sent out.
+    </div>
+</div>
+<h2 class="bb_section"><a name="8"></a>Gathering Feedback From Players</h2>
+Collecting feedback from players is up to you. We've seen a number of developers include a big
+'feedback' button right on the main menu of their game, leading to wherever that developer wishes to
+collect and manage the feedback. It could lead to a Steam forum, or it could be your discord
+channel, bug tracking software, your own website forums, or wherever else you wish.<br />
+<br />
+We suggest you engage directly with your audience - let them know what kind of feedback you are
+after and where best to share it. You can also provide links to your preferred feedback or
+communication system directly in a community Announcement.
+<h2 class="bb_section"><a name="9"></a>Frequently Asked Questions</h2>
+<strong><h4>Q: Why did Valve decide to work on this tool?</h4></strong><br />
+<strong>A:</strong> The new Steam Playtest feature came out of repeated requests from studios large
+and small, for a way to run a limited, lower-risk playtest with live customers. Dev teams wanted the
+freedom to run a playtest without stressing about their user reviews or interfering with their
+wishlist numbers… but they also wanted the control to start, pause, and end their playtests. We hope
+this new set of tools helps developers get closer to their players and make better games as a
+result. <br />
+<br />
+We saw a number of other surprising or unofficial solutions to the same set of problems; stuff like
+offering a demo that was really just an Open Beta, or shipping a free “Prologue” game to build
+momentum. Devs were using whatever tools they could to build community and gather playtesting data.
+Those are great problems to solve, so we want to provide an official, well-supported solution that
+is easier for developers and more consistent for players. <br />
+<br />
+<strong><h4>Q: What if I want to run a playtest but control access via Steam keys?</h4></strong
+><br />
+<strong>A:</strong> You can request keys for your Steam Playtest too. In fact, this is now the
+preferred method of running beta testing for your game if you need more than small group of testers.
+Remember, you can still test using your game's main App ID, using release override keys. You can
+find more information in the
+<a href="/doc/store/testing" target="_blank" rel="noreferrer">Testing On Steam</a> documentation.
+You can view our Steam Key rules and guidelines
+<a href="/doc/features/keys" target="_blank" rel="noreferrer">here</a>.<br />
+<br />
+<strong><h4>Q: I have a question or feedback, how do I contact you?</h4></strong><br />
+<strong>A:</strong> Please use our
+<a
+    href="https://help.steampowered.com/en/wizard/HelpWithPublishing"
+    target="_blank"
+    rel="noreferrer"
+    >contact form here</a
+>
+and let us know if you're running into an issue or have feedback on the feature.<br />
+<br />
+<strong><h4>Q: When can I use Steam Playtest?</h4></strong><br />
+<strong>A:</strong> We think the best, and probably most common, time to use this feature is before
+your game releases. Your first priority will probably be to put up a coming soon page for your game,
+to start gathering wishlists and building a community. But once that’s done, Steam Playtest gives
+you the option to get live player feedback prior to release.<br />
+<br />
+If you want, you can keep using the Playtest appID as a testing ground for new tools or features…
+but remember: Steam Playtest is free for customers. Keeping your playtest up after release probably
+only makes sense if your game is already free-to-play.<br />
+<br />
+<strong><h4>Q: How does Steam choose which playtesters to admit to a limited Playtest?</h4></strong
+><br />
+<strong>A:</strong> Steam will choose playtesters at random from the set of Steam accounts that have
+requested access. You do have the option to select to admit players from certain countries, although
+this would mostly make sense for limited server availability and addressing latency issues.<br />
+<br />
+<strong
+    ><h4>
+        Q: If a player requests access to my playtest, how will they be notified once I have granted
+        them access via the playtest controls?
+    </h4></strong
+><br />
+<strong>A:</strong> Players receive an email from Steam when they are added to a Playtest that
+they've expressed interest in. They will also see their status on the store page for the base
+game.<br />
+<br />
+<strong><h4>Q: Will players be notified when a Playtest is set to playable?</h4></strong><br />
+<strong>A:</strong> Steam will not email when a build for a Playtest is set to
+playable/non-playable. We recommend you use an announcement from the
+<a href="/doc/marketing/event_tools" target="_blank" rel="noreferrer"
+    >Steam Events and Announcements</a
+>
+system to let players know when the Playtest is playable.<br />
+<br />
+<strong
+    ><h4>
+        Q: If I'm using the Friend Invite system for my playtest, how will a user be notified if
+        they receive a playtest invite from a friend?
+    </h4></strong
+><br />
+<strong>A:</strong> Users are notified via Steam's notification system, which appears in the bell
+icon in the upper right corner of Steam's desktop client (or lower right in the mobile client). They
+will also see their invite status on the store page for the base game. In practice, we've found that
+most friends who are looking forward to playing together will notify each other directly (for
+example via text messages or social media) so the friend sending the invite can let their invited
+friend know to check your base game's Store Page to accept the invite. <br />
+<br />
+<strong><h4>Q: How do I end a Steam Playtest?</h4></strong><br />
+<strong>A:</strong> You can mark the playtest "Not playable" from the Steam Playtest page on the
+partner site. Make sure to disable the store-page signup first.<br />
+<br />
+<strong><h4>Q: Is my Steam Playtest confidential?</h4></strong><br />
+<strong>A:</strong> No - players signing up for a Playtest aren’t under nondisclosure agreements
+with you, and there shouldn’t be an expectation of secrecy. If you want to run a confidential beta
+and require players to agree to an NDA, you can do a few different things.<br />
+<ol>
+    <li>
+        Use the Playtest App ID, request keys, set the Playtest to Playable and Store Visibility to
+        Hidden.<br />
+    </li>
+    <li>Use the main game's App ID and request release override keys.</li>
+</ol>
+Both of these paths will require you to have your own solution for signing up and registering
+players.<br />
+<br />
+<strong
+    ><h4>
+        Q: Does my Steam Playtest have a store page? Can customers find it in the store?
+    </h4></strong
+><br />
+<strong>A:</strong> The Playtest will not have its own store page; instead, it will be listed as an
+option available on the main game’s store page. That way, any search traffic, store recommendations,
+etc all funnel towards the real product for users to wishlist and follow. <br />
+<br />
+<strong><h4>Q: Can I charge for access to my Playtest?</h4></strong><br />
+A: No - the design of Steam Playtest is for free signups. And since Playtests can be deactivated at
+any time, it’s not OK to monetize them with in-game transactions, or sell access. If you’re ready to
+charge money for a work-in-progress version of your game, you should use Steam
+<a href="/doc/store/earlyaccess" target="_blank" rel="noreferrer">Early Access</a>.<br />
+<br />
+<strong><h4>Q: How should I coordinate players for an online/multiplayer playtest?</h4></strong
+><br />
+<strong>A:</strong> Some multiplayer games may wish to open up servers during limited time windows,
+and that’s an ok use of Steam Playtest. We’d recommend using
+<a href="/doc/marketing/event_tools" target="_blank" rel="noreferrer"
+    >Steam Events and Announcements</a
+>
+to talk to your players about scheduled updates or coordinated playtests.<br />
+<br />
+<strong><h4>Q: If I run a Steam Playtest, will it mess with my real game?</h4></strong><br />
+<strong>A:</strong> Your Steam Playtest appID is a separate appID from your main game. As a result,
+things like playtime, wishlists, reviews, refunds, etc. are separate as well. For example:
+<ul>
+    <li>
+        A customer’s wishlist for your game won’t be impacted when they join or leave your
+        playtest.<br />
+    </li>
+    <li>
+        A customer who has only participated in the Playtest cannot review your actual game.<br />
+    </li>
+    <li>
+        A customer’s playtime in your Playtest has no impact on the Steam Refund policy, or the
+        player’s ability to get a refund on a purchase of your real game. <br />
+    </li>
+    <li>
+        A customer’s playtime in your Playtest has no impact on earning trading cards or unlocking
+        achievements. <br />
+    </li>
+</ul>
