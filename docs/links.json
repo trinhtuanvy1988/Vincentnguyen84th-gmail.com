@@ -547,6 +547,7 @@
     "store/retire_app",
     "store/review_process",
     "store/reviews",
+    "store/roadmap",
     "store/seasonpass",
     "store/tags",
     "store/testing",
