@@ -1,0 +1,255 @@
+<h1>Steam Frame Compatibility Review Process</h1>
+With the release of Steam Frame, we're bringing the Steam library to a new portable form factor. An
+important part of this transition is helping customers understand how specific Steam titles will
+function on Frame. While your game may run great on Frame without any work from you, it’s also
+possible that the shift to a portable form factor will impact the experience. We've designed a
+system to show at a glance how games will play on Frame, giving developers specific criteria to
+target, and making it easy for customers to find seamless, comfortable experiences.<br />
+<br />
+At the core of this system is a compatibility review process that's similar in structure to the
+existing Steam build review process:<br />
+<br />
+<ul>
+    <li>
+        Valve will review your game on Steam Frame, checking it against a specific set of criteria.
+        (See
+        <a
+            href="/doc/steamframe/compat#FrameCompatibilityChecklist"
+            target="_blank"
+            rel="noreferrer"
+            >Frame Compatibility Checklist</a
+        >
+        below.)<br />
+    </li>
+    <li>
+        When the review completes, you'll be provided detailed point-by-point results through the
+        partner site.<br />
+    </li>
+    <li>You'll have a window of time to review these results before they're published.<br /></li>
+    <li>
+        Once published, customers will be able to see the results of your compatibility testing when
+        browsing games in their library or the store.
+    </li>
+</ul>
+<br />
+The results of a compatibility review will not affect whether your game is available to customers on
+Frame, but will affect how it is presented.
+<div class="bb_callout">
+    <div>
+        Note: This review process only applies for games (both 2D and VR) running locally on Steam
+        Frame, not games running on a PC streamed to Frame.
+    </div>
+</div>
+<br />
+This process is a direct extension of the existing Steam Deck Compatibility Review process. Here is
+a quick overview of that process for those unfamiliar:<br />
+<a href="https://youtu.be/a8tNvhwkth8" target="_blank" rel="noreferrer"
+    >https://youtu.be/a8tNvhwkth8</a
+>
+<h2 class="bb_section"><a name="1"></a>Frame Compatibility Ratings</h2>
+Many games work great as-is on Frame. Some games may require manual user configuration, or may only
+be relevant to users with specific setups. Other games may not be a good experience due to the shift
+to a portable form factor or an incompatibility with Steam Frame's software/hardware stack. The core
+goal of the compatibility review process is making it clear to customers at a glance which of these
+groups each game fits into by assigning a badge to each:<br />
+<br />
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <img
+                    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/verified_50.png"
+                    alt="Verified badge"
+                    title="Verified badge"
+                />
+            </td>
+            <td><strong>Verified</strong></td>
+            <td>
+                Your game passes all compatibility checks. No configuration work is required for
+                users to access all game functionality.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img
+                    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/playable_50_1.png"
+                    alt="Playable badge"
+                    title="Playable badge"
+                />
+            </td>
+            <td><strong>Playable</strong></td>
+            <td>
+                Your game functions on Frame, but may require manual work from the user. (Examples:
+                manually selecting a community controller config, requiring the user to manually
+                bring up the on-screen keyboard, or tweaking in-game settings to meet minimum
+                performance requirements.)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img
+                    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/unsupported_50.png"
+                    alt="Unsupported badge"
+                    title="Unsupported badge"
+                />
+            </td>
+            <td><strong>Unsupported</strong></td>
+            <td>
+                Your game does not function on Frame due to incompatibility with Proton or specific
+                hardware components.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img
+                    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/unknown_50_1.png"
+                    alt="Unknown badge"
+                    title="Unknown badge"
+                />
+            </td>
+            <td><strong>Unknown</strong></td>
+            <td>
+                This game has not completed the compatibility review process. Information about how
+                the game will play on Frame is unavailable.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+Once results are published, users will see the appropriate compatibility badge when browsing games
+in both the store and the library. These badges are designed to help users quickly identify the
+experiences that are right for their goals and setup while browsing.
+<h2 class="bb_section"><a name="FrameCompatibilityChecklist"></a>Frame Compatibility Checklist</h2>
+<h2 class="bb_subsection"><a name="2"></a>Form Factor Requirements</h2>
+While Steam Frame is a fully-functional PC, we anticipate the most common use cases will be
+different from a standard desktop. In order to receive the
+<img
+    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/verified_18.png"
+    alt="Verified badge"
+    title="Verified badge"
+/>
+<strong>Verified</strong> badge, you need to meet all of the following criteria, aimed at helping
+customers feel comfortable playing your game on Frame. Most failures in this category will cause
+your game to appear with a
+<img
+    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/playable_18.png"
+    alt="Playable badge"
+    title="Playable badge"
+/>
+<strong>Playable</strong> badge.<br />
+<br />
+As a reminder, these represent a one-size-fits-all minimum bar. We trust you'll target what makes
+most sense for your game and customers.<br />
+<br />
+<strong>Performance</strong><br />
+<ul>
+    <li>
+        <strong>2D titles</strong>: your game must run at a minimum 30 fps at 1280x720 during normal
+        play.<br />
+    </li>
+    <li>
+        <strong>VR titles</strong>: your game must run at a minimum of 72 fps at 1728x1728 during
+        normal play.<br />
+        (<i
+            >Recommendations: We strongly recommend submitting both motion vector and depth suitable
+            for reprojection. This will not automatically throttle your application, but will enable
+            users to optionally run at higher refresh rates using improved reprojection
+            techniques.</i
+        >)<br />
+        VR games below 1440x1440 will appear with an
+        <img
+            src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/unsupported_18.png"
+            alt="Unsupported badge"
+            title="Unsupported badge"
+        />
+        <strong>Unsupported</strong> badge.
+        <div class="bb_callout">
+            <div>
+                To assist in evaluating performance, we've added a
+                <a href="/doc/steamframe/compat/perf_criteria">Performance Criteria Overlay</a> to
+                SteamVR.
+            </div>
+        </div>
+    </li>
+</ul>
+<br />
+<strong>Input</strong><br />
+<ul>
+    <li>
+        <strong>controller models</strong>: VR games that render controller models must show Frame's
+        controllers. (<i
+            >Recommendations: We recommend using OpenXR's
+            <a
+                href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_EXT_render_model"
+                target="_blank"
+                rel="noreferrer"
+                >XR_EXT_render_model</a
+            >
+            or
+            <a
+                href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_EXT_interaction_render_model"
+                target="_blank"
+                rel="noreferrer"
+                >XR_EXT_interaction_render_model</a
+            >, or OpenVR's
+            <a
+                href="https://github.com/ValveSoftware/openvr/blob/0924064316de3effbcd1acf1e309182a2deb1c05/headers/openvr.h#L4782"
+                target="_blank"
+                rel="noreferrer"
+                >IVRRenderModel</a
+            >
+            interface, for obtaining the controller model mesh at runtime in order to automatically
+            support current and future devices.</i
+        >)<br />
+    </li>
+    <li>
+        <strong>controller support</strong>: your game must support Steam Frame's physical controls.
+        The default controller configuration must provide users with the ability to access all
+        content. Players must not need to adjust any in-game settings in order to enable controller
+        support or this configuration.<br />
+    </li>
+    <li>
+        <strong>controller glyphs</strong>: when using Steam Frame's physical controls, on-screen
+        glyphs must either match Frame button names, or match Xbox 360/One button names. Mouse and
+        keyboard glyphs should not be shown if they are not the active input. Interacting with any
+        physical Frame controls using the default configuration must not show non-controller glyphs.
+        (<i
+            >Recommendations: We strongly recommend using the
+            <a href="/doc/api/isteaminput" target="_blank" rel="noreferrer">SteamInput API</a>,
+            which will automatically show the correct glyphs regardless of which input device the
+            user is using.</i
+        >)
+    </li>
+</ul>
+<br />
+<strong>Seamlessness</strong><br />
+<ul>
+    <li>
+        <strong>no device compatibility warnings</strong>: the app must not present the user with
+        information that the Frame software (ie., specific Linux distribution) or hardware (ie.,
+        GPU) is unsupported.<br />
+    </li>
+    <li>
+        <strong>launchers</strong>: for games with launchers, those launchers also must meet the
+        requirements listed here, including full navigability with a controller. (<i
+            >Recommendations: We recommend strongly against requiring the user to navigate a
+            launcher to play your game.</i
+        >)
+    </li>
+</ul>
+<h2 class="bb_subsection"><a name="3"></a>Proton Requirements</h2>
+Proton is a Windows compatibility layer. On Frame, games without native Linux builds will be run
+through Proton, a set of tools that will automatically take your current Windows executable and game
+data and run them on Steam Frame's Linux-based OS.<br />
+<br />
+Proton is a work in progress, and it's possible that your game may not yet be fully supported. If
+your game's Steam Frame compatibility review turns up blocking bugs or performance problems specific
+to Proton, those issues will be added to our internal issue tracking system and your game will
+appear with an
+<img
+    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/unsupported_18.png"
+    alt="Unsupported badge"
+    title="Unsupported badge"
+/>
+<strong>Unsupported</strong> badge. Once the issues have been resolved, we'll automatically notify
+you and re-test your game.<br />

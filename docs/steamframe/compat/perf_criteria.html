@@ -1,0 +1,245 @@
+<h1>Performance Criteria Overlay (VR titles)</h1>
+To help evaluate how your VR title is doing with regards to the
+<a href="/doc/steamframe/compat#FrameCompatibilityChecklist">Frame Compatibility Checklist</a>,
+SteamVR offers a <strong>Performance Criteria</strong> overlay that measures resolution and frame
+rate.
+<h2 class="bb_section"><a name="1"></a>Enabling the overlay</h2>
+You can turn on the in-headset performance criteria overlay by opening the SteamVR Dashboard,
+toggling <strong>Advanced Settings</strong> (bottom left corner) to <strong>Show</strong>, then head
+to the <strong>Developer</strong> tab and enable
+<strong>Draw Performance Criteria Overlay in Headset</strong>.<br />
+<br />
+<img
+    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/perf_criteria_enable.png"
+    alt="Enabling the Performance Criteria overlay"
+    title="Enabling the Performance Criteria overlay"
+/><br />
+<br />
+With this option enabled, SteamVR also shows the
+<a href="/doc/steamframe/debugging#PerformanceGraph">Performance Graph</a>. However, the
+<strong>Performance Criteria</strong> section of the overlay is only displayed while a VR title is
+running.<br />
+<br />
+After exiting a VR title, the <strong>Performance Criteria</strong> section of the overlay remains
+visible for up to 30 seconds with the current results, even if a VR title is launched immediately.
+<h2 class="bb_section"><a name="2"></a>Interpreting the overlay</h2>
+<br />
+The <strong>Performance Criteria</strong> section of the overlay is shown near the
+<strong>Performance Graph</strong>.<br />
+<br />
+<img
+    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/perf_criteria_overlay.png"
+    alt="A look at the Performance Criteria overlay"
+    title="A look at the Performance Criteria overlay"
+/><br />
+<br />
+On the right side of the <strong>Performance Graph</strong>, the
+<strong>Application Name</strong> and <strong>Steam Application ID</strong> are displayed.<br />
+Immediately above the <strong>Performance Graph</strong>, the <strong>Status</strong> is displayed
+and may be one of the following values:<br />
+<br />
+<table>
+    <tbody>
+        <tr>
+            <td><strong>VERIFIED</strong></td>
+            <td>
+                Performance and resolution are satisfactory to receive the
+                <img
+                    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/verified_18.png"
+                    alt="Verified badge"
+                    title="Verified badge"
+                />
+                <strong>Verified</strong> badge (subject to meeting the other requirements for the
+                badge).
+            </td>
+        </tr>
+        <tr>
+            <td><strong>PLAYABLE</strong></td>
+            <td>
+                Performance is satisfactory, however the resolution is only adequate to receive the
+                <img
+                    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/playable_18.png"
+                    alt="Playable badge"
+                    title="Playable badge"
+                />
+                <strong>Playable</strong> badge (subject to meeting the other requirements for the
+                badge).
+            </td>
+        </tr>
+        <tr>
+            <td><strong>UNSUPPORTED</strong></td>
+            <td>Performance and/or resolution are not adequate.</td>
+        </tr>
+        <tr>
+            <td><strong>PENDING</strong></td>
+            <td>
+                SteamVR is still collecting data to evaluate performance. This transient state
+                typically lasts a few seconds.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h2 class="bb_subsection">
+    <a name="3"></a>Additional information for <strong>VERIFIED/PLAYABLE</strong>
+</h2>
+<br />
+Next to the <strong>VERIFIED/PLAYABLE</strong> status, the <strong>Average Frame Time</strong> (in
+milliseconds) is displayed. This average is a rolling window of the last 32 frames. Next to the it,
+the <strong>Target Frame Time</strong> (in milliseconds) is displayed. The target is calculated
+based on the minimum required display refresh rate and includes the required headroom for
+SteamVR.<br />
+<br />
+<strong>Additional warnings</strong> are displayed if the game is not submitting depth buffers and
+motion vectors.
+<i
+    >These criteria do not affect the assignment of a badge for your title. We strongly recommend
+    submitting both motion vector and depth suitable for reprojection. This will not automatically
+    throttle your application, but will enable users to optionally run at higher refresh rates using
+    improved reprojection techniques.</i
+><br />
+<br />
+The depth and motion vectors shall be passed with the OpenVR or OpenXR API below.<br />
+<br />
+<table>
+    <tbody>
+        <tr>
+            <td>OpenVR (Depth-assisted reprojection)</td>
+            <td>
+                <a
+                    href="https://github.com/ValveSoftware/openvr/wiki/IVRCompositor::Submit"
+                    target="_blank"
+                    rel="noreferrer"
+                    >IVRCompositor::Submit</a
+                >
+                with
+                <a
+                    href="https://github.com/ValveSoftware/openvr/blob/v2.15.6/headers/openvr.h#L191"
+                    target="_blank"
+                    rel="noreferrer"
+                    >VRTextureWithPoseAndDepth_t</a
+                >
+            </td>
+        </tr>
+        <tr>
+            <td>OpenVR (Depth+Motion-assisted reprojection)</td>
+            <td>
+                <a
+                    href="https://github.com/ValveSoftware/openvr/wiki/IVRCompositor::Submit"
+                    target="_blank"
+                    rel="noreferrer"
+                    >IVRCompositor::Submit</a
+                >
+                with
+                <a
+                    href="https://github.com/ValveSoftware/openvr/blob/v2.15.6/headers/openvr.h#L202"
+                    target="_blank"
+                    rel="noreferrer"
+                    >VRTextureWithMotion_t</a
+                >
+            </td>
+        </tr>
+        <tr>
+            <td>OpenXR (Depth-assisted reprojection)</td>
+            <td>
+                <a
+                    href="https://registry.khronos.org/OpenXR/specs/1.0/man/html/XR_KHR_composition_layer_depth.html"
+                    target="_blank"
+                    rel="noreferrer"
+                    >XR_KHR_composition_layer_depth</a
+                >
+            </td>
+        </tr>
+        <tr>
+            <td>OpenXR (Depth+Motion-assisted reprojection) Vendor-agnostic</td>
+            <td>
+                <a
+                    href="https://registry.khronos.org/OpenXR/specs/1.1/man/html/XR_EXT_frame_synthesis.html"
+                    target="_blank"
+                    rel="noreferrer"
+                    >XR_EXT_frame_synthesis</a
+                >
+            </td>
+        </tr>
+        <tr>
+            <td>OpenXR (Depth+Motion-assisted reprojection) Oculus</td>
+            <td>
+                <a
+                    href="https://registry.khronos.org/OpenXR/specs/1.0/man/html/XR_FB_space_warp.html"
+                    target="_blank"
+                    rel="noreferrer"
+                    >XR_FB_space_warp</a
+                >
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+You can visualize the depth or motion vectors submitted by using the
+<a href="/doc/steamframe/debugging#GameTextures"
+    >Draw Performance Criteria Game Textures in Headset</a
+>
+option.
+<h2 class="bb_subsection">
+    <a name="4"></a>Additional information for <strong>UNSUPPORTED</strong>
+</h2>
+<br />
+If the VR title renders at a resolution that is too low, it will be indicated with the
+<strong>resolution is below [...]</strong> message. If the game uses dynamic resolution, this
+condition uses the minimum resolution observed frame-to-frame.<br />
+<br />
+If the performance is not adequate, it will be indicated with the
+<strong>frame time &gt; [...]</strong> message. The target is calculated based on the minimum
+required display refresh rate and includes the required headroom for SteamVR.<br />
+<br />
+An <strong>additional warning</strong> is displayed if the game is using a resolution greater than
+the recommended resolution. If the game uses dynamic resolution, this condition uses the maximum
+resolution observed frame-to-frame.<br />
+<br />
+SteamVR specifies the recommended resolution with the OpenVR or OpenXR API below. <br />
+<br />
+<table>
+    <tbody>
+        <tr>
+            <td>OpenVR</td>
+            <td>
+                <a
+                    href="https://github.com/ValveSoftware/openvr/wiki/IVRSystem%3A%3AGetRecommendedRenderTargetSize"
+                    target="_blank"
+                    rel="noreferrer"
+                    >IVRSystem::GetRecommendedRenderTargetSize</a
+                >
+            </td>
+        </tr>
+        <tr>
+            <td>OpenXR</td>
+            <td>
+                <a
+                    href="https://registry.khronos.org/OpenXR/specs/1.0/man/html/xrEnumerateViewConfigurationViews.html"
+                    target="_blank"
+                    rel="noreferrer"
+                    >xrEnumerateViewConfigurationViews</a
+                >
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+To help troubleshoot transient frame time issues with your game, you can look at the
+<strong>perfcriteria.txt</strong> file in the SteamVR logs folder. The first 2 lines recapitulate
+the Application Name, Steam Application ID, target frame time, effective resolution, etc. The 3rd
+line is a list of frame times leading to the violation of the threshold set with the target frame
+time.
+<h2 class="bb_section"><a name="5"></a>Clearing transient conditions</h2>
+<br />
+If a transient condition (eg: a loading screen that slows the rendering) or a well-understood issue
+is causing the overlay to mark the game as <strong>UNSUPPORTED</strong>, it is useful to clear this
+status on the overlay and resume evaluation.<br />
+<br />
+This can be done by bringing up the SteamVR <strong>Now Playing</strong> screen, then selecting
+<strong>Clear Performance Criteria Status</strong>.<br />
+<br />
+<img
+    src="https://cdn.steamstatic.com/steamcommunity/public/images/steamworks_docs/english/perf_criteria_clear.png"
+    alt="perf_criteria_clear.png"
+    title="perf_criteria_clear.png"
+/>

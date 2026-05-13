@@ -451,6 +451,8 @@
     "steamframe",
     "steamframe/adb_lepton",
     "steamframe/apk_upload",
+    "steamframe/compat",
+    "steamframe/compat/perf_criteria",
     "steamframe/compatibility",
     "steamframe/controllers",
     "steamframe/debugging",
