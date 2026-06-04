@@ -241,6 +241,16 @@ Unauthorized.
         </tr>
     </tbody>
 </table>
+<br />
+The response from the call will look something like this:<br />
+<br />
+<div class="bb_code">
+    { "players": [ { "SteamId": "77561198355051011", "CommunityBanned": false, "VACBanned": false,
+    "NumberOfVACBans": 0, "DaysSinceLastBan": 0, "NumberOfGameBans": 0, "EconomyBan": "none" }, {
+    "SteamId": "77561197978236369", "CommunityBanned": false, "VACBanned": true, "NumberOfVACBans":
+    1, "DaysSinceLastBan": 0, "NumberOfGameBans": 1, "bans": [ { "AppIdMin": 60, "AppIdMax": 60,
+    "BanStartTime": 1780525984, "BanType": 2, "BanProviderId": 0 } ], "EconomyBan": "none" } ] }
+</div>
 <h2 class="bb_section"><a name="GetPlayerSummaries"></a>GetPlayerSummaries</h2>
 <div class="bb_code http">GET https://partner.steam-api.com/ISteamUser/GetPlayerSummaries/v2/</div>
 <table>
