@@ -1,0 +1,145 @@
+<h1>Getting your game ready for Steam Deck and Steam Machine</h1>
+While at their core Steam Deck and Steam Machines are PCs, their form factors lend themselves to an
+additional set of customer expectations. In addition to the criteria used for
+<a href="/doc/steamhardware/compat" target="_blank" rel="noreferrer"
+    >Steam Deck and Steam Machine compatibility</a
+>, we have some additional recommendations, presented here.<br />
+<br />
+All recommendations here are targeted at meeting customer expectations around input and display,
+improving performance, and taking full advantage of the new opportunities provided by the Steam Deck
+and Steam Machine. While the recommendations here are disproportionately valuable to Deck/Machine
+customers, they are also all<strong> valuable for PC gamers in general,</strong> many of whom only
+play with controllers, only play in their living room, etc. <br />
+<br />
+<strong
+    >Note: We are currently working on updated APIs to help game developers detect the type of
+    hardware their game is running on.</strong
+>
+More on that soon, but we would like to emphasize that while providing default graphics options for
+specific hardware (like Steam Deck) is fine, we recommend against restricting access to settings
+based on specific hardware.
+<h2 class="bb_subsection"><a name="1"></a>Input</h2>
+<ul>
+    <li>
+        <strong>Default Controller Configuration</strong>: We strongly recommend (and require for
+        <a href="/doc/steamhardware/compat" target="_blank" rel="noreferrer"
+            >Deck/Machine Verified</a
+        >) that the default controller configuration for your game enables access to all in-game
+        functionality. If your game doesn't natively support controllers, we recommend creating a
+        controller configuration to map to the appropriate mouse and keyboard inputs. Better yet,
+        implementing gamepad or native Steam Input support may open your game to a whole new set of
+        customers.<br />
+    </li>
+    <li>
+        <strong>Text Input</strong>: We strongly recommend (and require for
+        <a href="/doc/steamhardware/compat" target="_blank" rel="noreferrer"
+            >Deck/Machine Verified</a
+        >) that games automatically display an on-screen keyboard when requiring the user to input
+        text. We recommend using one of the two Steamworks SDK on-screen keyboard APIs, depending on
+        your use case:
+        <a href="/doc/api/ISteamUtils#ShowFloatingGamepadTextInput" target="_blank" rel="noreferrer"
+            >ShowFloatingGamepadTextInput</a
+        >
+        (sends direct key inputs) and
+        <a href="/doc/api/ISteamUtils#ShowGamepadTextInput" target="_blank" rel="noreferrer"
+            >ShowGamepadTextInput</a
+        >
+        (callback-based).<br />
+    </li>
+    <li>
+        <strong>Gyro/Trackpad Friendliness</strong>: We recommend that games with support for both
+        mouse-style (1:1 movement) and joystick-style camera movement cleanly support both at the
+        same time. This is known as "Mixed Input". We recommend allowing mouse events to affect the
+        camera as they normally would without perturbing simultaneous controller functionality, and
+        only switching to mouse/keyboard mode if a mouse click event is received. Common problems
+        include joystick input getting locked out when mouse camera is used and vice versa,
+        controller buttons not working when mouse camera is being used, on-screen button prompts
+        changing between controller and keyboard/mouse icons, all of which make it more difficult
+        for customers to play with their preferred control scheme. (Note: this functionality is
+        automatic when using the
+        <a href="/doc/api/isteaminput" target="_blank" rel="noreferrer">Steam Input API</a>.)<br />
+        <br />
+        To fix this, accumulate all sources of user camera rotation (i.e. mouse and joystick),
+        before updating your camera, instead of selecting only the last active one. Test the output
+        by moving both the camera joystick and the mouse at the same time, and confirm that the
+        camera's movement uses the Mixed Inputs.<br />
+    </li>
+    <li>
+        <strong>[Optional] Pre-calibrate "Real World Sensitivity":</strong> Steam Input's "Gyro To
+        Mouse" and "Flick Stick" modes, as well as "Reset Camera" action, generate the customer's
+        desired "real world camera angle change". These are converted into mouse output. The "Dots
+        per 360" setting is a ratio used to help convert those angles into the mouse-pixels required
+        to rotate each game's in-game camera by the desired angle. Typically, a customer will have
+        to tune this value to get this ratio correct, but it's quite possible to "pre-calibrate"
+        this value so that the tuning step can be skipped.<br />
+        <ul>
+            <li>
+                In your game code: set your camera-angles-per-mouse-pixel ratio to 0.022 degrees per
+                pixel. i.e. one mouse dot will turn your camera 0.022 degrees.<br />
+            </li>
+            <li>Set your default user mouse sensitivity to 2.5x. <br /></li>
+            <li>
+                These are the standards used in Source 2 engine games. This is why the default "Dots
+                per 360 setting" is 6545. 360degrees / ( 0.022 * 2.5 ) = 6545.45'
+            </li>
+        </ul>
+    </li>
+</ul>
+<h2 class="bb_subsection"><a name="2"></a>Graphics</h2>
+<ul>
+    <li>
+        <strong>Vulkan API</strong>: We recommend targeting Vulkan as your primary graphics API for
+        best performance and battery life. If you use an engine like Unity or Unreal, enabling
+        Vulkan in your build for all users will result in the highest performance/longevity. (Note:
+        Proton includes a DirectX-to-Vulkan translation layer. If your game or engine has
+        high-quality DirectX support but no Vulkan support, it's likely that this automated
+        translation layer will exceed the performance of doing a custom Vulkan implementation.)<br />
+    </li>
+    <li>
+        <strong>Video/Audio Codecs</strong>: We recommend using standalone codecs (eg., VP9 or AV1)
+        rather than codecs that are tied to a specific vendor (eg., WMF).
+    </li>
+</ul>
+<h2 class="bb_subsection"><a name="3"></a>Game Features</h2>
+<ul>
+    <li>
+        <strong>Clouded Saves</strong>: For games that allow saving, we recommend enabling automatic
+        clouding of saved games: users should be able to save their game on a Deck or Steam Machine
+        and resume on a different PC, and vice versa, without manually transferring files. This
+        means that games should provide a form of cloud save via either Steam Cloud or an automatic
+        third-party service such as a game- or publisher-specific account with server-side save
+        files. We highly recommend using
+        <a href="/doc/features/cloud" target="_blank" rel="noreferrer">Steam Cloud</a> for automatic
+        transfers. We recommend against syncing game configuration settings, ie., display
+        resolution, between different devices.<br />
+    </li>
+    <li>
+        <strong>Graphics Settings</strong>: Cloud saves are great, but make sure graphics settings
+        are not included in that clouded data. Graphics settings should be set and saved on a
+        per-device basis for the best experience. In addition, while providing default graphics
+        options for specific hardware (like Steam Deck) is fine, we do not recommend making some
+        settings unavailable dependent on hardware.<br />
+    </li>
+    <li>
+        <strong>Support different aspect ratios</strong>: Players have displays with many different
+        aspect ratios - not just 16:9 or 16:10. Some are much wider or taller - so make sure your
+        title can support gameplay at these different aspect ratios.<br />
+    </li>
+    <li>
+        <strong>Offline Mode</strong>: We strongly recommend all singleplayer content is accessible
+        without an Internet connection. You can test your game without any online connectivity,
+        including the first run on a new Steam account. This feature is especially valuable for Deck
+        customers, who may have more sporadic network access than a standard gaming PC.<br />
+    </li>
+    <li>
+        <strong>Launchers</strong>: We recommend putting all required functionality into your game
+        client rather than requiring users to navigate a launcher before running your game.
+        Launchers often rely on platform-specific frameworks (ie., .NET, WPF, etc.) that can turn
+        into difficult experiences for customers on a small screen using a controller for
+        navigation. When native UI launchers are required, you can use the
+        <a href="/doc/api/ISteamUtils#SetGameLauncherMode" target="_blank" rel="noreferrer"
+            >SetGameLauncherMode</a
+        >
+        API to automatically translate controller input to keyboard/mouse events to assist the user.
+    </li>
+</ul>
