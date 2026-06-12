@@ -503,15 +503,20 @@ community hubs and user profiles, but can still be accessed by a direct link.<br
         </tr>
         <tr>
             <td><strong>add_tags</strong></td>
-            <td>string</td>
+            <td>string[]</td>
             <td></td>
-            <td>Tags to add</td>
+            <td>
+                Tags to add. Example usage: add_tags[0]='yourtag1', add_tags[1]='yourtag2', etc.
+            </td>
         </tr>
         <tr>
             <td><strong>remove_tags</strong></td>
-            <td>string</td>
+            <td>string[]</td>
             <td></td>
-            <td>Tags to remove</td>
+            <td>
+                Tags to remove. Example usage: remove_tags[0]='tag_to_remove1',
+                remove_tags[1]='tag_to_remove2', etc.
+            </td>
         </tr>
     </tbody>
 </table>
