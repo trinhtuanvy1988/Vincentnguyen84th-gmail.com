@@ -713,9 +713,23 @@ controller is a Steam controller, Xbox 360 controller, PS4 controller, etc.<br /
 <br />
 Returns raw motion data for the specified controller.<br />
 <br />
+<strong>Note on Orientation:</strong> The motion data returned is oriented to the <i>hardware</i> of
+the controller, as opposed to how the controller is naturally held. You may need to make design
+accommodations to your gyro control schemes with this in mind. In the case of "HandHeld" devices
+with integrated screens like the SteamDeck (<i>k_ESteamInputType_SteamDeckController</i>) and Lenovo
+Legion Go (<i>k_ESteamInputType_SteamOSHandheld</i>), users will typically rotate the controller up
+by ~90 degrees in order to point the screen toward their eyes. In these cases, consider applying a
+90 degree counter rotation in pitch to the gyro quaternion and gyro speed values, or use the
+accelerometer/gravity direction to make orientation invariant control schemes). <br />
+<br />
+The Quaternion returned is based on the accumulated rotation of every gyro packet received from the
+controller, while the gyro and accelerometer values represent the "latest" packets received. <br />
+<br />
+In the case of dual Gyroscopes (i.e. <i>k_ESteamInputType_SwitchJoyConPair</i>), only the right hand
+controller's motion data is returned.<br />
+<br />
 <strong>Returns:</strong> <a href="/doc/api/ISteamInput#InputMotionData_t">InputMotionData_t</a
 ><br />
-<br />
 <br />
 <strong>Example:</strong><br />
 <div class="bb_code cpp">
